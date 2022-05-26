@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      border: 1px solid #000;
+      margin: 10px;
+      padding: 10px;
+    }
+    .item {
+      background-color: #666;
+    }
+    .container1 { 
+      text-align: center;
+    }
+    .container2 .item {
+      width: 500px;
+      margin: auto;
+      text-align: center;
+    }
+    .container3 {
+      position: relative;
+      height: 100px;
+    }
+    .container3 .item {
+      width: 300px;
+      height: 100px;
+      position: absolute;
+      left: 50%;
+      margin-left: -150px;text-align: center;
+      line-height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container container1">
+    <span class="item span1">一段文字</span>
+  </div>
+  <div class="container container2">
+    <div class="item div2">block item</div>
+  </div>
+  <div class="container container3">
+    <div class="item div3">absolue item</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      border: 1px solid #000;
+      margin: 10px;
+      padding: 10px;
+      height: 200px;
+    }
+    .item {
+      background-color: #666;
+    }
+    .container1 { 
+      text-align: center;
+      line-height: 100px;
+      height: 100px;
+    }
+    .container2 {
+      position: relative;
+    }
+    .container2 .item {
+      width: 300px;
+      height: 100px;
+      position: absolute;
+      left: 50%;
+      margin-left: -150px;
+      top: 50%;
+      margin-top: -50px;
+    }
+    .container3 {
+      position: relative;
+    }
+    .container3 .item {
+      width: 200px;
+      height: 80px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .container4 {
+      position: relative;
+    }
+    .container4 .item {
+      width: 100px;
+      height: 50px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container container1">
+    <span class="item">一段文字</span>
+  </div>
+  <div class="container container2">
+    <div class="item">block item</div>
+  </div>
+  <div class="container container3">
+    <div class="item">absolue item</div>
+  </div>
+  <div class="container container4">
+    <div class="item">absolue item</div>
+  </div>
+</body>
+</html>
