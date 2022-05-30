@@ -71,7 +71,7 @@ export class MyPromise<T> {
   then<TResult1 = T, TResult2 = never> (
     onFulfilled?: ((value: T | PromiseLike<T>) => TResult1 | PromiseLike<TResult1>) | undefined | null,
     onRejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
-  ) {
+  ): MyPromise<TResult1 | TResult2> {
     onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : (v: T | PromiseLike<T>) => <any>v
     onRejected = typeof onRejected === 'function' ? onRejected : (e: any) => {throw e}
 
