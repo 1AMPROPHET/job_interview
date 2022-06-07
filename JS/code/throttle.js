@@ -4,8 +4,8 @@ function throttle(fn, delay = 500) {
     if (!timer) {
       timer = setTimeout(() => {
         fn()
-        clearTimeout(timer, delay)
-      })
+        clearTimeout(timer)
+      }, delay)
     }
   }
 }
