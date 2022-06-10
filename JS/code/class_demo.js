@@ -63,3 +63,23 @@ const stu = new mixStudent('wang', 78)
 stu.eat()
 console.log(stu.name)
 
+// 寄生式组合继承
+
+function Person(name) {
+  this.name = name
+}
+
+Person.prototype.getName = function () {
+  return this.name
+}
+
+function Teacher() {
+  // 构造函数继承
+  Person.apply(this, arguments)
+}
+
+// 原型式继承
+Teacher.prototype = Object.create(Person.prototype)
+
+// 原型的constructor 指向自身
+Teacher.prototype.constructor = Teacher

@@ -61,3 +61,69 @@ padString 可选
     * 取消请求
     * 自动转换json数据
     * 客户端支持抵御XSRF攻击
+
+* cookie 的有效时间设置为0，表示跟随系统默认，其销毁时间与session 销毁时间相同，即都在浏览器关闭后的特定事件删除。如果不设置有效时间，那么，cookie的有效时间等效于会话时间。
+
+* e.target、e.currentTarget
+  * e.target：触发事件的元素
+  * e.currentTarget：绑定事件的元素
+  * addEventListener绑定几次就执行几次先捕获，后冒泡
+
+* 数组的常见方法
+  * 操作方法（增删改查）
+    * 增： push、unshift、splice、concat
+    * 删： pop、shift、splice、slice
+    * 改： splice、
+    * 查： indexOf、includes、find
+  * 排序方法
+    * reverse
+    * sort
+  * 转换方法
+    * join
+  * 迭代方法
+    * 不改变原数组的常用方法
+      * some
+      * every
+      * forEach（不改变原数组、但是callback调用时可能会改变数组）
+      * filter
+      * map
+* 区分数组和对象
+  * Array.isArray
+  * instanceof
+  * constructor
+  * Object.prototype.toString.call
+
+* 获取实例对象的原型对象
+  * Object.getPrototypeOf(实例对象)
+
+* ES6新特性
+  * let const 块级作用域
+  * 对象解构赋值
+  * 模板字符串
+  * 字符串扩展方法（includes、startsWith、endsWith）
+  * 参数默认值、剩余参数
+  * ...展开运算符
+  * 箭头函数
+  * Object.assign 复制合并对象
+  * Proxy
+  * Reflect
+  * Promise
+  * class 继承
+  * Set
+  * Map
+  * Symbol
+  * for of
+  * 迭代器
+  * Generator 生成器
+  * includes 函数
+  * `**` 指数运算
+  * values 将对象的值以数组形式返回
+
+* 跨域的方法
+  * CORS
+  * Nginx代理
+  * WebSocket
+  * postMessage
+  * JSONP
+
+* async 函数 中 await 的 new Promise 如果美有返回值则不执行后面的内容 .then 函数中的参数期待的是函数，如果不是函数会发生透传
