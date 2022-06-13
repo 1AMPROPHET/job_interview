@@ -8,6 +8,11 @@
 
 * JSON.parse() ：parses JSON to a javascipt value
 * 对于箭头函数，如果只返回一个值，我们不必编写花括号。但是，如果您想从一个箭头函数返回一个对象，您必须在圆括号之间编写它，否则不会返回任何值!
+
+  ```js
+  const arrowFunc = () => ({a: 'xxx'})
+  ```
+
 * Symbol类型是不可枚举的。Object.keys方法返回对象上的所有可枚举的键属性。Symbol类型是不可见的，并返回一个空数组。 记录整个对象时，所有属性都是可见的，甚至是不可枚举的属性。 这是Symbol的众多特性之一：除了表示完全唯一的值（防止对象意外名称冲突，例如当使用2个想要向同一对象添加属性的库时），您还可以隐藏这种方式对象的属性（尽管不完全。你仍然可以使用Object.getOwnPropertySymbols()方法访问 Symbol。
 * 常规函数，例如giveLydiaPizza函数，有一个prototype属性，它是一个带有constructor属性的对象（原型对象）。 然而，箭头函数，例如giveLydiaChocolate函数，没有这个prototype属性。 尝试使用giveLydiaChocolate.prototype访问prototype属性时会返回undefined。
 * .push方法返回数组的长度，而不是数组本身！
@@ -67,7 +72,7 @@ padString 可选
 * e.target、e.currentTarget
   * e.target：触发事件的元素
   * e.currentTarget：绑定事件的元素
-  * addEventListener绑定几次就执行几次先捕获，后冒泡
+  * addEventListener绑定几次就执行几次先捕获，后冒泡，第三个参数为true，则表示事件在捕获阶段调用，第三个参数为false，则表示事件在冒泡阶段调用。
 
 * 数组的常见方法
   * 操作方法（增删改查）
@@ -126,4 +131,55 @@ padString 可选
   * postMessage
   * JSONP
 
-* async 函数 中 await 的 new Promise 如果美有返回值则不执行后面的内容 .then 函数中的参数期待的是函数，如果不是函数会发生透传
+* async 函数 中 await 的 new Promise 如果没有返回值则不执行后面的内容
+* then 函数中的参数期待的是函数，如果不是函数会发生透传
+
+* 使用js生成1-10000的数组
+  * 除了使用循环外，最简单是使用Array.from
+
+    ```js
+    // 1 
+    Array.from(new Array(10001).keys()).slice(1)
+
+    // 2
+    Array.from({length: 10000}, (node, i) => i + 1)
+    ```
+
+* 直接在script标签中写export会报错
+  * 现代浏览器可支持script标签引入模块或脚本，如果要引入模块，必须给script标签添加type=“module”。如果引入脚本，则不需要type
+
+* js 与 CSS 动画
+  * CSS3动画优点
+    * 在性能上会好一些，浏览器会对CSS3的动画做一些优化
+    * 代码相对简单
+  * 缺点
+    * 在动画控制上不够灵活
+    * 兼容性不好
+  * js 弥补了两个缺点，复杂动画靠js，简单靠CSS3
+
+* 移动端点击事件的300ms延迟
+  * 是因为移动端有双击缩放这个功能，在click后浏览器等待300ms，看看有没有下一次点击事件。
+  * 三种方法解决
+    * 用meta标签禁用页面缩放
+    * 通过meta标签将网页的viewport设置为ideal viewport
+    * 调用一些js库，例如fastclick
+
+* JS中的错误类型
+  * Error
+  * EvalError
+  * RangeError
+  * ReferenceError
+  * SyntaxError
+  * TypeError
+  * URIError
+
+* for in 与 for of
+  * for of 获取对象的键值，for in 获取对象的键名
+  * for in 会遍历整个原型链，for of 不会遍历原型链
+  * 对于数组的遍历，for in 会返回所有可枚举的属性，包括原型链上的属性，for of 只返回数组下标对应的属性值
+  * for...in 循环主要是为了遍历对象而生，不适用于遍历数组；for...of 循环可以用来遍历数组、类数组对象，字符串、Set、Map 以及 Generator 对象。
+
+* isNaN 和 Number.isNaN 区别
+  * 和全局函数 isNaN() 相比，Number.isNaN() 不会自行将参数转换成数字，只有在参数是值为 NaN 的数字时，才会返回 true。
+
+  * Number.isNaN() 方法确定传递的值是否为NaN，并且检查其类型是否为Number。它是原来的全局isNaN() 的更稳妥的版本。
