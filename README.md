@@ -1,3 +1,5 @@
 # job_interview
-javascript job interview
+
+## JavaScript job interview
+
 This repository is prepared for my job interview.
