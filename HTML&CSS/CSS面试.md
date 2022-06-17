@@ -13,6 +13,7 @@
 ### 1. 什么是盒子模型
 
 * 所有HTML元素可以看作盒子，在CSS中，"box model"这一术语是用来设计和布局时使用。
+* 当对一个文档进行布局的时候，浏览器的渲染引擎会根据标准之一的CSS基础盒模型，将所有元素表示为一个个矩形的盒子。
 
 * CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：外边距，边框，内边距、和实际内容。
 
@@ -90,8 +91,16 @@ Content（内容） - 盒子的内容，显示文本和图像
 
 * 什么是BFC？
   * Block format context，块级格式化上下文
+  * 定位方案
+    * 内部的box会在垂直方向上一个接一个放置
+    * box垂直方向的距离由margin决定，属于同一个BFC的两个相邻box的margin会发生重叠
+    * 每个元素的margin box的左边，与包含块border box的左边相接触
+    * BFC的区域不会与float box重叠
+    * BFC是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素
+    * 计算BFC的高度时，浮动元素也会参与计算
   * 一块独立渲染区域，内部元素的渲染不会影响边界以外的元素
 * 形成BFC的常见条件
+  * 根元素，即html
   * float 不是 none
   * position 是 absolute 或 fixed
   * overflow 不是 visible
@@ -336,7 +345,7 @@ Content（内容） - 盒子的内容，显示文本和图像
 ## 定位
 
 * absolute 和 relative分别依据什么定位
-  * absolute：依据最近的一层定位元素定位
+  * absolute：依据最近的一层定位元素定位，即非 static 定位祖先元素
     * 定位元素
       * absolute reletive fixed
       * body
@@ -350,9 +359,15 @@ Content（内容） - 盒子的内容，显示文本和图像
   * 垂直居中
     * inline元素：line-height的值等于height
     * absolute元素：top：50% + margin-top：负值
+    * absolute元素：top：calc(50%-50px); left: calc(50%-50px)
     * absolute元素：transform: translate（-50%， -50%）,left: 50%, top: 50%
     * absolute元素：top left bottom right = 0 + margin：auto
     * 父元素采用table布局、子元素采用tablecell布局
+    * 转行内元素，inline-block vertical-align：middle
+    * flex：父元素 display：flex；justify-content：center，align-items：center
+    * flex：父元素 display：flex；justify-content：center 子元素：align-self：center
+    * grid：父元素 display：grid justify-items：center align-items：center
+    * grid：父元素 display：grid 子元素 justify-self：center align-self：center 
 
 * line-height如何继承
   * 写具体数值，如30px，则继承该值
