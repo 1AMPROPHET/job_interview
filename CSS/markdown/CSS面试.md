@@ -367,7 +367,7 @@ Content（内容） - 盒子的内容，显示文本和图像
     * flex：父元素 display：flex；justify-content：center，align-items：center
     * flex：父元素 display：flex；justify-content：center 子元素：align-self：center
     * grid：父元素 display：grid justify-items：center align-items：center
-    * grid：父元素 display：grid 子元素 justify-self：center align-self：center 
+    * grid：父元素 display：grid 子元素 justify-self：center align-self：center
 
 * line-height如何继承
   * 写具体数值，如30px，则继承该值
