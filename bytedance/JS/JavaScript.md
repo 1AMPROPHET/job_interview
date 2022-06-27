@@ -22,13 +22,13 @@ graph LR
   p3 ---> p34(new关键字)
   p3 ---> p35(如何实现类)
 
-  JavaScript ---> p4(Promise) ---> p41(什么是 Promise)
-  p4 ---> P42(实现一个Promise)
-  p4 ---> p43(async 与 await)
-
   JavaScript ---> p6(事件机制/Event Loop) ---> p61(实现时间的订阅与发布)
   p6 ---> p62(什么是 Event Loop)
   p6 ---> p63(宏任务/微任务)
+
+  JavaScript ---> p4(Promise) ---> p41(什么是 Promise)
+  p4 ---> P42(实现一个Promise)
+  p4 ---> p43(async 与 await)
 
   JavaScript ---> p7(常用方法) ---> p71(数组方法)
   p7 ---> p72(ES6新特性)
