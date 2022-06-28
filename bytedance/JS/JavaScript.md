@@ -394,13 +394,13 @@ class B {
 
 ## 4. this
 
-### 4.1 普通函数中的this
+### 4.1 普通函数中的 this
 
 ### 4.2 构造函数的 this
 
 - 使用 `new` 操作符时，`this` 指向生成的新对象（`new` 调用时的返回值，如果没有显式返回对象或者函数，才是返回生成的新对象）
 
-### 4.3 对象中的函数this
+### 4.3 对象中的函数 this
 
 ### 4.4 原型链中的 this
 
@@ -449,7 +449,7 @@ Function.prototype.myApply = function () {
   _this.fn = this
   let res = _this.fn(args)
   delete _this.fn
-  return res 
+  return res
 }
 ```
 
@@ -463,25 +463,26 @@ Function.prototype.myApply = function () {
 
 #### 5.1.2 什么是事件流
 
-- 事件流描述的就是从页面接收事件的顺序。早期的IE 和 Netscape 提出了相反的事件流概念，IE事件流是事件冒泡，而Netscape的事件流就是事件捕获。
-- 事件冒泡，即从下至上，从目标出大的元素逐级向上传播，知道window对象
-- 而事件捕获，即从document逐级向下传播到目标元素。
+- 事件流描述的就是从页面接收事件的顺序。早期的 IE 和 Netscape 提出了相反的事件流概念，IE 事件流是事件冒泡，而 Netscape 的事件流就是事件捕获。
+- 事件冒泡，即从下至上，从目标出大的元素逐级向上传播，知道 window 对象
+- 而事件捕获，即从 document 逐级向下传播到目标元素。
 
 ### 5.2 事件的三个阶段
 
-- DOM2级事件规定的事件流包括三个阶段
+- DOM2 级事件规定的事件流包括三个阶段
   - 事件捕获阶段
   - 处于目标阶段
   - 事件冒泡阶段
 
 ### 5.3 事件的代理委托
 
-- DOM事件处理分为4个级别：DOM0级事件处理、DOM1级事件处理、DOM2级事件处理、DOM3级事件处理。
+- DOM 事件处理分为 4 个级别：DOM0 级事件处理、DOM1 级事件处理、DOM2 级事件处理、DOM3 级事件处理。
 
 #### 5.3.1 DOM0
 
-- DOM0级事件具有极好的跨浏览器优势，会以最快的速度绑定。
-  - 第一种方式是内联模型（行内绑定），将函数名直接作为html标签中属性的属性值。内联模型缺点是不符合内容与行为分离的规范。
+- DOM0 级事件具有极好的跨浏览器优势，会以最快的速度绑定。
+
+  - 第一种方式是内联模型（行内绑定），将函数名直接作为 html 标签中属性的属性值。内联模型缺点是不符合内容与行为分离的规范。
 
   ```HTML
   <div onclick="btnClick()">click</div>
@@ -492,7 +493,7 @@ Function.prototype.myApply = function () {
   </script>
   ```
 
-  - 第二种方式是脚本模型（动态绑定），选中某个节点，然后添加onclick属性。缺点是同一节点只能添加一次同类型事件。
+  - 第二种方式是脚本模型（动态绑定），选中某个节点，然后添加 onclick 属性。缺点是同一节点只能添加一次同类型事件。
 
   ```HTML
   <div id="btn">点击</div>
@@ -504,11 +505,11 @@ Function.prototype.myApply = function () {
   </script>
   ```
 
-  - DOM0级只支持冒泡阶段
+  - DOM0 级只支持冒泡阶段
 
 #### 5.3.2 DOM2
 
-- 进一步规范之后，有了DOM2级事件处理程序，其中定义了两个方法
+- 进一步规范之后，有了 DOM2 级事件处理程序，其中定义了两个方法
   - `addEventListener()` -- 添加事件侦听器
   - `removeEventListener()` -- 删除事件侦听器
 - 函数均有三个参数，第一个参数是要处理的事件类型，第二个参数是作为事件处理程序的函数，第三个参数是一个`boolean`值，默认`false`表示使用冒泡机制，`true`表示捕获机制。
@@ -518,7 +519,7 @@ Function.prototype.myApply = function () {
 
 ### 5.4 事件委托
 
-- 如果有多个DOM节点需要监听事件的情况下，给每个DOM绑定监听函数，会极大地影响页面的性能，可以使用事件委托来进行优化，事件委托就是利用了事件冒泡的原理
+- 如果有多个 DOM 节点需要监听事件的情况下，给每个 DOM 绑定监听函数，会极大地影响页面的性能，可以使用事件委托来进行优化，事件委托就是利用了事件冒泡的原理
 - 优点
   - 提高性能：每一个函数都会占用内存空间，只需要添加一个事件处理程序代理所有事件，所占用的内存空间会更少
   - 动态监听：使用事件委托可以自动绑定动态添加的元素，即新增的节点不需要主动添加也可以有和其他元素一样的事件
@@ -534,6 +535,7 @@ Function.prototype.myApply = function () {
 - 概念
   - 线程是进程中执行运算的最小单位，是进程中的一个实体，是被系统独立调度和分派的基本单位，线程自己不拥有系统资源，只拥有一点在运行中必不可少的资源，但它可与同属一个进程的其它线程共享进程所拥有的全部资源。一个线程可以创建和撤消另一个线程，同一进程中的多个线程之间可以并发执行。
 - 优点
+
   - 易于调度
   - 提高并发性，通过线程可方便有效地实现并发性。进程可创建多个线程来执行同一程序的不同部分。
   - 开销少。创建线程比创建进程要快，所需开销很少。
@@ -551,20 +553,20 @@ Function.prototype.myApply = function () {
     - 拥有资源：进程是拥有资源的一个独立单位，线程不拥有系统资源，但可以访问隶属于进程的资源.
     - 系统开销：在创建或撤消进程时，由于系统都要为之分配和回收资源，导致系统的开销明显大于创建或撤消线程时的开销。
 
-### 6.2 JS为什么是单线程
+### 6.2 JS 为什么是单线程
 
-- javaScript的单线程，与它的用途有关。作为浏览器脚本语言，JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程，否则会带来很复杂的同步问题。比如，假定JavaScript同时有两个线程，一个线程在某个DOM节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准
+- javaScript 的单线程，与它的用途有关。作为浏览器脚本语言，JavaScript 的主要用途是与用户互动，以及操作 DOM。这决定了它只能是单线程，否则会带来很复杂的同步问题。比如，假定 JavaScript 同时有两个线程，一个线程在某个 DOM 节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准
 
 ### 6.3 微任务/宏任务
 
-- 一个`event loop`有一个或者多个`task`队列，当用户代理安排一个任务，必须将该任务增加到相应的event loop的一个task队列中
+- 一个`event loop`有一个或者多个`task`队列，当用户代理安排一个任务，必须将该任务增加到相应的 event loop 的一个 task 队列中
 
 #### 6.3.1 task
 
 task 也被称为 macrotask，是一个先进先出的队列，由指定的任务源去提供任务
 
 - 哪些是 task 任务源
-  - DOM操作任务源
+  - DOM 操作任务源
   - 用户交互任务源
   - 网络任务源
   - history traversal 任务源
@@ -577,9 +579,9 @@ task 也被称为 macrotask，是一个先进先出的队列，由指定的任�
 
 #### 6.3.2 microtask
 
-每一个event loop都有一个microtask队列，与task队列有些相似，都是先进先出，由指定的任务源去提供任务，不同的是一个event loop中只有一个 microtask
+每一个 event loop 都有一个 microtask 队列，与 task 队列有些相似，都是先进先出，由指定的任务源去提供任务，不同的是一个 event loop 中只有一个 microtask
 
-- 通常认为的microtask任务源
+- 通常认为的 microtask 任务源
   - process.nextTick
   - Promise
   - Object.observe
@@ -587,7 +589,7 @@ task 也被称为 macrotask，是一个先进先出的队列，由指定的任�
 
 ### 6.4 调用栈（执行栈）
 
-- JS有一个 main thread 主线程和 call stack 调用栈，所有任务都会被放到调用栈等待主线程执行。调用栈采用的是后进先出的规则，当函数执行时，会被添加到站的顶部，当执行栈执行完毕后，就会被从栈顶移出，直到栈内被清空。
+- JS 有一个 main thread 主线程和 call stack 调用栈，所有任务都会被放到调用栈等待主线程执行。调用栈采用的是后进先出的规则，当函数执行时，会被添加到站的顶部，当执行栈执行完毕后，就会被从栈顶移出，直到栈内被清空。
 - JS 中的执行栈就具有这样的结构，当引擎第一次遇到 JS 代码时，会产生一个全局执行上下文并压入执行栈，每遇到一个函数调用，就会往栈中压入一个新的上下文。引擎执行栈顶的函数，执行完毕，弹出当前执行上下文。
 
 ### 6.5 同步任务和异步任务
@@ -605,35 +607,37 @@ flowchart LR
   p6 <---> p7
 ```
 
-- 执行栈在执行完同步任务后，查看执行栈是否为空，如果执行栈为空，就会去检查微任务队列是否为空，如果不为空的话，会按照先进先出的规则全部执行完为任务后，设置微任务队列为null，然后再执行宏任务，如此循环。
+- 执行栈在执行完同步任务后，查看执行栈是否为空，如果执行栈为空，就会去检查微任务队列是否为空，如果不为空的话，会按照先进先出的规则全部执行完为任务后，设置微任务队列为 null，然后再执行宏任务，如此循环。
 
-### 6.6 浏览器与node事件循环的区别
+### 6.6 浏览器与 node 事件循环的区别
 
 #### 6.6.1 浏览器内核
 
 - 简单来说浏览器内核是通过取得页面内容、整理信息（应用 CSS）、计算和组合最终输出可视化的图像结果，通常也被称为渲染引擎。浏览器内核是多线程，在内核控制下各线程相互配合以保持同步，一个浏览器通常由以下常驻线程组成：
 - 一个浏览器通常由一下常驻线程组成
-  - GUI渲染线程
-    - 负责页面的渲染，解析html，css，构建dom树，布局，绘制等。当界面需要重绘或者触发回流时，执行该线程
-    - 与 js 引擎线程互斥，js引擎线程执行时，GUI渲染会被挂起，当任务队列空闲时，js引擎才会去执行GUI渲染
+  - GUI 渲染线程
+    - 负责页面的渲染，解析 html，css，构建 dom 树，布局，绘制等。当界面需要重绘或者触发回流时，执行该线程
+    - 与 js 引擎线程互斥，js 引擎线程执行时，GUI 渲染会被挂起，当任务队列空闲时，js 引擎才会去执行 GUI 渲染
   - JavaScript 引擎线程
-    - 主要负责处理js脚本，执行代码
+    - 主要负责处理 js 脚本，执行代码
   - 定时触发器线程
     - 负责 setTimeout、setInterval
   - 事件触发线程
-    - 负责将准备好的事件交给js引擎线程执行，如回调函数等
+    - 负责将准备好的事件交给 js 引擎线程执行，如回调函数等
   - 异步 http 请求线程
-    - 负责执行异步请求一类的函数的线程，如 Promise、axios等
-    - 主线程依次执行代码时，遇到异步请求，会将函数交给该线程处理，当监听到状态码变更，如果有回调函数，事件触发线程会将回调函数加入到任务队列尾部，等待js引擎线程执行。
+    - 负责执行异步请求一类的函数的线程，如 Promise、axios 等
+    - 主线程依次执行代码时，遇到异步请求，会将函数交给该线程处理，当监听到状态码变更，如果有回调函数，事件触发线程会将回调函数加入到任务队列尾部，等待 js 引擎线程执行。
 
-#### 6.6.2 浏览器中的event Loop
+#### 6.6.2 浏览器中的 event Loop
 
 - Micro Task 和 Macro task
+
   - 事件循环中的异步队列有两种：macro（宏任务）队列和 micro（微任务）队列。宏任务队列可以有多个，微任务队列只有一个。
   - 常见的 macro-task 比如：setTimeout、setInterval、 setImmediate、script（整体代码）、 I/O 操作、UI 渲染等。
   - 常见的 micro-task 比如: process.nextTick、new Promise().then(回调)、MutationObserver(html5 新特性) 等。
 
 - Event Loop 过程解析
+
   - 一个完整的 Event Loop 过程，可以概括为以下阶段
 
   ```mermaid
@@ -664,3 +668,473 @@ flowchart LR
   - poll 阶段：获取新的 I/O 事件, 适当的条件下 node 将阻塞在这里
   - check 阶段：执行 setImmediate() 的回调
   - close callbacks 阶段：执行 socket 的 close 事件回调
+- 以上六个阶段不包括 `process.nextTick()`
+
+- timer
+  - timer 阶段会执行 setTimeout 和 setInterval 回调，并且是由 poll 阶段控制的。同样，在 Node 中定时器指定的时间也不是准确时间，只能是尽快执行。
+- poll
+
+  - poll 是一个至关重要的阶段，这一阶段中，系统做两件事
+
+    - 回到 timer 阶段执行回调
+    - 执行 I/O 回调
+
+  - 并且在进入该阶段时如果没有设定了 timer 的话，会发生以下两件事情
+    - 如果 poll 队列不为空，会遍历回调队列并同步执行，直到队列为空或者达到系统限制
+    - 如果 poll 队列为空时，会有两件事发生
+      - 如果有 `setImmediate` 回调需要执行，poll 阶段会停止并且进入到 check 阶段执行回调
+      - 如果没有 `setImmediate` 回调需要执行，会等待回调被加入到队列中并立即执行回调，这里同样会有个超时时间设置防止一直等待下去
+
+- check 阶段
+
+  - `setImmediate()`的回调会被加入 check 队列中，从 event loop 的阶段图可以知道，check 阶段的执行顺序在 poll 阶段之后。
+
+- 举例
+
+```js
+console.log("start");
+setTimeout(() => {
+  console.log("timer1");
+  Promise.resolve().then(function () {
+    console.log("promise1");
+  });
+}, 0);
+setTimeout(() => {
+  console.log("timer2");
+  Promise.resolve().then(function () {
+    console.log("promise2");
+  });
+}, 0);
+Promise.resolve().then(function () {
+  console.log("promise3");
+});
+console.log("end");
+```
+
+- 一开始执行栈的同步任务（这属于宏任务）执行完毕后（依次打印出 start end，并将 2 个 timer 依次放入 timer 队列）,会先去执行微任务（这点跟浏览器端的一样），所以打印出 promise3（最新版 node 与浏览器相同）
+
+- 然后进入 timers 阶段，执行 timer1 的回调函数，打印 timer1，并将 promise.then 回调放入 microtask 队列，同样的步骤执行 timer2，打印 timer2；`这点跟浏览器端相差比较大，timers 阶段有几个 setTimeout/setInterval 都会依次执行，并不像浏览器端，每执行一个宏任务后就去执行一个微任务`（关于 Node 与浏览器的 Event Loop 差异，下文还会详细介绍）。
+
+#### 6.6.4 Node 与浏览器的 Event Loop 差异
+
+- 浏览器环境下，microtask 的任务队列是每个 macrotask 执行完之后执行。而在 Node.js 中，microtask 会在事件循环的各个阶段之间执行，也就是一个阶段执行完毕，就会去执行 microtask 队列的任务。
+
+- 最新的 Node（11）之后，事件循环和浏览器差不多，执行一个宏任务谭厚清空微任务和 `nextTick`，但对宏任务进行了分层，当 `event loop` 执行到某个阶段是会将当前阶段对应的队列依次执行。当该队列用尽或达到回调限制，事件循环将移动到下一阶段。
+
+  - 主栈的代码执行完毕以后会清空微任务（nextTick 优先于 promise.then），
+
+  - 进入到事件环当中轮询（每执行一个宏任务会清空微任务和 nextTick）
+
+#### 6.6.5 process.nextTick
+
+- 每当事件循环进行一次完整的行程时，我们都将其称为一个 tick。每当一个函数传给 `process.nextTick()`时，则指示引擎在当前操作结束（在下一个事件循环开始之前）时调用此函数。
+- 这是可以告诉 JS 引擎异步地（在当前函数之后）处理函数的方式，但是尽快执行而不是将其排入队列。调用 `setTimeout(() => {}, 0)` 会在下一个滴答结束时执行该函数，比使用 `nextTick()`（其会优先执行该调用并在下一个滴答开始之前执行该函数）晚得多。
+
+## 7. Promise
+
+### 7.1 什么是 Promise? Promise 用来解决什么问题？
+
+- Promise 是异步编程的一种解决方案：从语法上讲，promise 是一个对象，从它可以获取异步操作的消息；从本意上讲，它是承诺，承诺它过一段时间会给你一个结果。
+  promise 有三种状态：`pending(等待态)`，`fulfiled(成功态)`，`rejected(失败态)`；状态一旦改变，就不会再变。创造 promise 实例后，它会立即执行。
+
+- Promise 是用来解决两个问题的
+  - 回调地狱，代码难以维护， 常常第一个的函数的输出是第二个函数的输入这种现象
+  - promise 可以支持多个并发的请求，获取并发请求中的数据
+
+### 7.2 ES6 Promise 用法
+
+- Promise 是一个构造函数，自己身上有 all、reject、resolve 这几个眼熟的方法，原型上有 then、catch 等同样很眼熟的方法。
+
+- Promise 的构造函数接收一个参数：函数，并且这个函数需要传入两个参数：
+
+  - resolve ：异步操作执行成功后的回调函数
+  - reject：异步操作执行失败后的回调函数
+
+- then 链式调用
+
+  - 表面上看，Promise 只是能够简化层层回调的写法，而实质上，Promise 的精髓是“状态”，用维护状态、传递状态的方式来使得回调函数能够及时调用，它比传递 callback 函数要简单、灵活的多。
+
+- reject
+
+  - 把 Promise 的状态置为 rejected，这样我们在`then`中就能捕捉到，然后执行“失败”情况的回调。
+
+- `then`中传了两个参数，`then`方法可以接受两个参数，第一个对应 resolve 的回调，第二个对应 reject 的回调。
+
+- catch
+
+  - 和 then 的第二个参数一样，用来指定 reject 的回调
+  - 在执行 resolve 的回调（也就是上面 then 中的第一个参数）时，如果抛出异常了（代码出错了），那么并不会报错卡死 js，而是会进到这个 catch 方法中
+
+- all 用法
+
+  - 谁跑的慢，以谁为准执行回调。all 接收一个数组参数，里面的值最终都算返回 Promise 对象
+
+- race 用法
+  - 谁跑的快，以谁为准执行回调
+
+### 7.3 手写 Promise
+
+```js
+const PENDING = Symbol('pending')
+const RESOLVED = Symbol('resolved')
+const REJECTED = Symbol('rejected')
+
+const resolvePromise = function (x, promise2, resolve, reject) {
+  if (x === promise2) {
+    reject(new TypeError('Chain cicle detected in promise'))
+  }
+  if (x != null && (typeof x === 'object' || typeof x === 'function')) {
+    let called = false
+    try {
+      let then = x.then
+      if (typeof then === 'function') {
+        then.call(x, y => {
+          if (called) return
+          called = true
+          resolvePromise(y, promise2, resolve, reject)
+        }, err => {
+          if (called) return
+          called = true
+          reject(err)
+        })
+      } else {
+        resolve(x)
+      }
+    } catch (err) {
+      if (called) return
+      called = true
+      reject(err)
+    }
+  } else {
+    resolve(x)
+  }
+}
+
+class Promise {
+  constructor(executor) {
+    this.status = PENDING
+    this.value = undefined
+    this.reason = undefined
+    this.onResolvedCallbacks = []
+    this.onRejectedCallbacks = []
+
+    const resolve = (value) => {
+      if (this.status === PENDING) {
+        this.status = RESOLVED
+        this.value = value
+        this.onResolvedCallbacks.forEach(fn => fn())
+      }
+    }
+
+    const reject = (reason) => {
+      if (this.status === PENDING) {
+        this.status = REJECTED
+        this.reason = reason
+        this.onRejectedCallbacks.forEach(fn => fn())
+      }
+    }
+
+    try {
+      executor(resolve, reject)
+    } catch (err) {
+      reject(err)
+    }
+  }
+
+  then(onFulfilled, onRejected) {
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : (value) => value
+    onRejected = typeof onRejected === 'function' ? onRejected : (e) => {throw e}
+
+    const promise2 = new Promise((resolve, reject) => {
+      if (this.status === RESOLVED) {
+        queueMicrotask(() => {
+          try {
+            let x = onFulfilled(this.value)
+            resolvePromise(x, promise2, resolve, reject)
+          } catch (err) {
+            reject(err)
+          }
+        })
+      }
+      if (this.status === REJECTED) {
+        queueMicrotask(() => {
+          try {
+            ler x = onRejected(this.reason)
+            resolvePromise(x, promise2, resolve, reject)
+          } catch (err) {
+            reject(err)
+          }
+        })
+      }
+      if (this.status === PENDING) {
+        this.onResolvedCallbacks.push(() => {
+          queueMicrotask(() => {
+            try {
+              let x = onFulfilled(this.value)
+              resolvePromise(x, promise2, resolve, reject)
+            } catch (err) {
+              reject(err)
+            }
+          })
+        })
+        this.onRejectedCallbacks.push(() => {
+          queueMicrotask(() => {
+            try {
+              ler x = onRejected(this.reason)
+              resolvePromise(x, promise2, resolve, reject)
+            } catch (err) {
+              reject(err)
+            }
+          })
+        })
+      }
+    })
+  }
+
+  catch(onRejected) {
+    return this.then(null, onRejected)
+  }
+}
+
+Promise.all = function (promises) {
+    //promises是一个promise的数组
+    return new Promise(function (resolve, reject) {
+        let arr = []; //arr是最终返回值的结果
+        let i = 0; // 表示成功了多少次
+        function processData(index, data) {
+            arr[index] = data;
+            if (++i === promises.length) {
+                resolve(arr);
+            }
+        }
+        for (let i = 0; i < promises.length; i++) {
+            promises[i].then(function (data) {
+                processData(i, data)
+            }, reject)
+        }
+    })
+}
+// 只要有一个promise成功了 就算成功。如果第一个失败了就失败了
+Promise.race = function (promises) {
+    return new Promise((resolve, reject) => {
+        for (var i = 0; i < promises.length; i++) {
+            promises[i].then(resolve,reject)
+        }
+    })
+}
+// 生成一个成功的promise
+Promise.resolve = function(value){
+    return new Promise((resolve,reject) => resolve(value);
+}
+// 生成一个失败的promise
+Promise.reject = function(reason){
+    return new Promise((resolve,reject) => reject(reason));
+}
+Promise.defer = Promise.deferred = function () {
+    let dfd = {};
+    dfd.promise = new Promise( (resolve, reject) =>  {
+        dfd.resolve = resolve;
+        dfd.reject = reject;
+    });
+    return dfd
+}
+module.exports = Promise;
+```
+
+### 7.4 Promise 小 Tips
+
+- async 函数 中 await 的 new Promise 构造函数如果没有返回值则不执行后面的内容
+- then 函数中的参数期待的是函数，如果不是函数会发生透传
+
+  ```JS
+  Promise.resolve(1)
+  .then(2)
+  .then(Promise.resolve(3))
+  .then(console.log)
+  // 1
+  ```
+
+### 7.5 async & await
+
+- 供了一种新的编写异步代码方式，使得异步代码看起来像是同步代码
+- 建立在 `promise` 的基础上
+- 和 `promise` 一样，也是非阻塞的
+
+- 实际上`await`是一个让出线程的标志。`await`后面的函数会先执行一遍，然后就会跳出整个 async 函数来执行后面 js 栈（后面会详述）的代码。等本轮事件循环执行完了之后又会跳回到 async 函数中等待 await
+
+### 7.6 async/await 与 forEach
+
+- 使用 for of 代替 forEach。
+- for-of 可以遍历各种集合对象的属性值，要求被遍历的对象需要实现迭代器 (iterator) 方法，例如 `myObject[Symbol.iterator]()` 用于告知 JS 引擎如何遍历该对象。一个拥有 `[Symbol.iterator]()` 方法的对象被认为是可遍历的。
+
+## 8. 浏览器的缓存机制
+
+### 8.1 什么是缓存
+
+- 缓存是一种保存资源副本并在下次请求时直接使用该副本的技术。当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不会去源服务器重新下载。这样带来的好处有：缓解服务器端压力，提升性能(获取资源的耗时更短了)。对于网站来说，缓存是达到高性能的重要组成部分。缓存需要合理配置，因为并不是所有资源都是永久不变的：重要的是对一个资源的缓存应截止到其下一次发生改变（即不能缓存过期的资源）
+
+### 8.2 为什么需要缓存
+
+- 通过复用以前获取的资源，可以显著提高网站和应用程序的性能。Web 缓存减少了等待时间和网络流量，因此减少了显示资源表示形式所需的时间。通过使用 HTTP 缓存，变得更加响应性。
+
+- 哪些资源可以被缓存---一些静态资源（js css img）
+
+### 8.3 缓存基本认识
+
+- 浏览器在加载资源时，先根据这个资源的一些`http header`判断它是否命中强缓存，强缓存如果命中，浏览器直接从自己的缓存中读取资源，不会发请求到服务器。比如某个`css`文件，如果浏览器在加载它所在的网页时，这个`css`文件的缓存配置命中了强缓存，浏览器就直接从缓存中加载这个`css`，连请求都不会发送到网页所在服务器。
+
+- 当强缓存没有命中的时候，浏览器一定会发送一个请求到服务器，通过服务器端依据资源的另外一些 http header 验证这个资源是否命中协商缓存，如果协商缓存命中，服务器会将这个请求返回，但是不会返回这个资源的数据，而是告诉客户端可以直接从缓存中加载这个资源，于是浏览器就又会从自己的缓存中去加载这个资源
+
+- 强缓存与协商缓存的共同点是：如果命中，都是从客户端缓存中加载资源，而不是从服务器加载资源数据；区别是：强缓存不发请求到服务器，协商缓存会发请求到服务器
+
+- 当协商缓存也没有命中的时候，浏览器直接从服务器加载资源数据
+
+### 8.4 强缓存
+
+#### 8.4.1 强缓存的原理
+
+- 当浏览器对某个资源的请求命中了强缓存时，返回的 http 状态为`200`，在 chrome 的开发者工具的 network 里面`size`会显示为`from cache`。
+
+- 强缓存是利用`Expires`或者`Cache-Control`这两个`http response header`实现的，它们都用来表示资源在客户端缓存的有效期。
+
+  - `Expires`是`http1.0`提出的一个表示资源过期时间的`header`，它描述的是一个绝对时间，由服务器返回，用`GMT`格式的字符串表示，如：`Expires:Thu, 31 Dec 2037 23:55:55 GMT`
+
+  - Expires 缓存原理
+
+    - 浏览器第一次跟服务器请求一个资源，服务器在返回这个资源的同时，在`respone`的`header`加上`Expires`
+
+    - 浏览器在接收到这个资源后，会把这个资源连同所有`response header`一起缓存下来（所以缓存命中的请求返回的`header`并不是来自服务器，而是来自之前缓存的`header`
+
+    - 浏览器再请求这个资源时，先从缓存中寻找，找到这个资源后，拿出它的`Expires`跟当前的请求时间比较，如果请求时间在`Expires`指定的时间之前，就能命中缓存，否则就不行
+
+    - 如果缓存没有命中，浏览器直接从服务器加载资源时，Expires Header 在重新加载的时候会被更新
+
+    - `Expires`是较老的强缓存管理`header`，由于它是服务器返回的一个绝对时间，在服务器时间与客户端时间相差较大时，缓存管理容易出现问题，比如随意修改下客户端时间，就能影响缓存命中的结果。所以在`http1.1`的时候，提出了一个新的`header`，就是`Cache-Control`，这是一个相对时间，在配置缓存的时候，以秒为单位，用数值表示，如：`Cache-Control:max-age=315360000`
+
+  - Cache-Control 缓存原理
+
+    - 浏览器第一次跟服务器请求一个资源，服务器在返回这个资源的同时，在`respone`的`header`加上`Cache-Control`
+
+    - 浏览器在接收到这个资源后，会把这个资源连同所有`response header`一起缓存下来
+
+    - 浏览器再请求这个资源时，先从缓存中寻找，找到这个资源后，根据它第一次的请求时间和`Cache-Control`设定的有效期，计算出一个资源过期时间，再拿这个过期时间跟当前的请求时间比较，如果请求时间在过期时间之前，就能命中缓存，否则就不行
+
+    - 如果缓存没有命中，浏览器直接从服务器加载资源时，`Cache-Control Header`在重新加载的时候会被更新
+
+    - `Cache-Control`描述的是一个相对时间，在进行缓存命中的时候，都是利用客户端时间进行判断，所以相比较`Expires`，`Cache-Control`的缓存管理更有效，安全一些。
+
+    - `Cache-Control`的值
+      - max-age
+      - no-cache（不强制缓存，服务端处理）
+      - no-store（不强制缓存，服务端也不处理，直接返回）
+      - private
+      - public
+
+  - 这两个 header 可以只启用一个，也可以同时启用，当 response header 中，`Expires`和`Cache-Control`同时存在时，`Cache-Control`优先级高于`Expires`
+
+  - 强缓存还有一点需要注意的是，通常都是针对静态资源使用，动态资源需要慎用
+
+#### 8.4.2 协商缓存的原理
+
+- 当浏览器对某个资源的请求没有命中强缓存，就会发一个请求到服务器，验证协商缓存是否命中，如果协商缓存命中，请求响应返回的`http状态为304`并且会显示一个`Not Modified`的字符串
+
+- `Last-modified If-Modified-Since` 控制协商缓存
+
+  - 浏览器第一次跟服务器请求一个资源，服务器在返回这个资源的同时，在 respone 的 header 加上`Last-Modified`的 header，这个 header 表示这个资源在服务器上的最后修改时间
+
+  - 浏览器再次跟服务器请求这个资源时，在 request 的 header 上加上`If-Modified-Since`的 header，这个 header 的值就是上一次请求时返回的`Last-Modified`的值
+
+  - 服务器再次收到资源请求时，根据浏览器传过来`If-Modified-Since`和资源在服务器上的最后修改时间判断资源是否有变化，如果没有变化则返回`304 Not Modified`，但是不会返回资源内容；如果有变化，就正常返回资源内容。当服务器返回`304 Not Modified`的响应时，response header 中不会再添加`Last-Modified`的 header，因为既然资源没有变化，那么`Last-Modified`也就不会改变，这是服务器返回 304 时的 response header
+
+  - 浏览器收到`304`的响应后，就会从缓存中加载资源
+
+  - 如果协商缓存没有命中，浏览器直接从服务器加载资源时，`Last-Modified Header`在重新加载的时候会被更新，下次请求时，`If-Modified-Since`会启用上次返回的`Last-Modified`值
+
+- `ETag、If-None-Match` 控制协商缓存
+
+  - 浏览器第一次跟服务器请求一个资源，服务器在返回这个资源的同时，在 respone 的 header 加上`ETag`的 header，这个 header 是服务器根据当前请求的资源生成的一个唯一标识，这个唯一标识是一个字符串，只要资源有变化这个串就不同，跟最后修改时间没有关系，所以能很好的补充`Last-Modified`的问题
+
+  - 浏览器再次跟服务器请求这个资源时，在`request`的`header`上加上`If-None-Match`的 header，这个 header 的值就是上一次请求时返回的`ETag`的值
+
+  - 服务器再次收到资源请求时，根据浏览器传过来`If-None-Match`和然后再根据资源生成一个新的`ETag`，如果这两个值相同就说明资源没有变化，否则就是有变化；如果没有变化则返回`304 Not Modified`，但是不会返回资源内容；如果有变化，就正常返回资源内容。与`Last-Modified`不一样的是，当服务器返回`304 Not Modified`的响应时，由于`ETag`重新生成过，response header 中还会把这个`ETag`返回，即使这个`ETag`跟之前的没有变化
+
+### 8.5 浏览器行为对缓存的影响
+
+#### 8.5.1 三种刷新
+
+- 正常操作：url
+- 手动刷新：F5
+- 强制刷新：ctrl + F5
+
+#### 8.5.2 缓存策略
+
+- 正常操作：强制缓存有效，协商缓存有效
+- 手动刷新：强制缓存失效，协商缓存有效
+- 强制刷新：都失效
+
+## 9. 浏览器渲染原理
+
+### 9.1 浏览器渲染原理
+
+- 重排也叫回流（Reflow），重绘（Repaint），会影响到浏览器的性能，给用户的感觉就是网页访问慢，或者网页会卡顿，不流畅
+
+#### 9.1.1 浏览器工作流程
+
+- 浏览器会解析三个模块
+
+  - `HTML、SVG、XHTML`，解析生成 `DOM` 树
+  - `CSS` 解析生成 `CSS` 规则树
+  - `JavaScript` 用来操作 `DOM API` 和 `CSSOM API`，生成 `DOM Tree` 和 `CSSOM API`
+
+- 解析完成后，浏览器会通过已经解析好的 `DOM Tree` 和 `CSS` 规则树来构造 `Rendering Tree`
+
+  - `Rendering Tree` 渲染树并不等于 DOM 树，因为一些像 `Header` 或 `display：none` 的东西就没必要放在渲染树中
+  - `CSS` 的 `Rule Tree` 主要是为了完成匹配并把 `CSS Rule` 附加上 `Rendering`
+  - `Tree` 上的每个 `Element`，也就是 `DOM` 节点，即 `Frame`。然后，计算每个 `Frame` 的位置，这又叫 `layout` 和 `reflow` 过程
+  - 最后通过调用操作系统 `Native GUI` 的 `API` 绘制
+
+#### 9.1.2 渲染顺序
+
+- 当浏览器拿到一个网页后，首先浏览器会先解析HTML，如果遇到了外链的css，会一下载css，一边解析HTML
+
+- 当css下载完成后，会继续解析css，生成css Rules tree,`不会影响到HTML的解析`
+
+- 当遇到`<script>`标签时，一旦发现有对javascript的引用，就会立即下载脚本，同时阻断文档的解析，等脚本执行完成后，再开始文档的解析
+
+- 当DOM树和CSS规则树已经生成完毕后，构造 Rendering Tree
+
+- 调用系统渲染页面
+
+#### 9.1.3 浏览器地址栏里输入URL后的全过程
+
+- 什么是URL
+  - URL是统一资源定位符（Uniform Resource Locator），是资源标识最常见的形式。URL描述了一台特定服务器上某资源的特定位置。它们可以明确说明如何从一个精确、固定的位置获取资源。
+
+  - URL说明了协议、服务器和本地资源。
+
+  - 而浏览器都是基于HTTP协议，而HTTP是个应用层的协议。HTTP无需操心网络通信的具体细节都交给了TCP/IP。
+
+  - TCP:
+    - 无差错的数据传输。
+    - 按序传输（数据总是按照发送的顺序到达）。
+    - 未分段的数据流（可以在任意时刻将数据发送出去）。
+
+  - HTTP协议位于TCP的上层。HTTP使用TCP来传输其报文数据。
+
+- 解析URL
+
+  - 当用户输入一个完整的URL之后，浏览器就开始解析URL的构成，以便于查找资源地址
+  - URL最重要的3个部分是方案scheme，主机host和路径path。如果URL中不包含port，浏览器会默认使用80端口进行访问
+
+- DNS 域名解析
+
+  - 什么是DNS
+
+    - `DNS( Domain Name System)`是“域名系统”的英文缩写，DNS是应用层协议，事实上他是为其他应用层协议工作的，包括不限于HTTP和SMTP以及FTP，用于将用户提供的主机名解析为ip地址
+
+- 建立 TCP 连接
+
+  - 三次握手
+  - 四次挥手
+
+- 页面渲染
