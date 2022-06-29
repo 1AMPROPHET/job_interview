@@ -20,7 +20,7 @@ Function.prototype.myCall = function () {
     return false
   }
   let args = [...arguments]
-  let _this = args.shift(1)
+  let _this = args.shift()
   _this.fn = this
   let res = _this.fn(...args)
   delete _this.fn

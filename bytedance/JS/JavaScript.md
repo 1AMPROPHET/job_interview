@@ -2,62 +2,62 @@
 
 ```mermaid
 graph LR
-  JavaScript ---> p0(数据类型) ---> p01(基本数据类型)
-  p0 ---> p02(深/浅拷贝)
+  JavaScript -----> p0(数据类型) -----> p01(基本数据类型)
+  p0 -----> p02(深/浅拷贝)
 
-  JavaScript(JavaScript) ---> p1(作用域/作用域链/闭包) ---> p11(什么是作用域/var const let)
-  p1 ---> p14(数据类型判断)
-  p1 ---> p12(作用域链)
-  p1 ---> p13(闭包)
+  JavaScript(JavaScript) -----> p1(作用域/作用域链/闭包) -----> p11(什么是作用域/var const let)
+  p1 -----> p14(数据类型判断)
+  p1 -----> p12(作用域链)
+  p1 -----> p13(闭包)
 
-  JavaScript ---> p2(this/call/apply/bind) ---> p21(JS中的this)
-  p2 ---> p22(如何改变this指向)
-  p2 ---> p23(apply 与 call的区别)
-  p2 ---> p24(实现call和apply)
-  p2 ---> p25(实现bind)
+  JavaScript -----> p2(this/call/apply/bind) -----> p21(JS中的this)
+  p2 -----> p22(如何改变this指向)
+  p2 -----> p23(apply 与 call的区别)
+  p2 -----> p24(实现call和apply)
+  p2 -----> p25(实现bind)
 
-  JavaScript ---> p3(原型/原型链/继承) ---> p31(原型)
-  p3 ---> p32(原型链)
-  p3 ---> p33(原型链实现继承)
-  p3 ---> p34(new关键字)
-  p3 ---> p35(如何实现类)
+  JavaScript -----> p3(原型/原型链/继承) -----> p31(原型)
+  p3 -----> p32(原型链)
+  p3 -----> p33(原型链实现继承)
+  p3 -----> p34(new关键字)
+  p3 -----> p35(如何实现类)
 
-  JavaScript ---> p5(事件) --->  p51(事件流)
-  p5 ---> p52(事件的三个阶段)
-  p5 ---> p53(事件的代理委托)
-  p5 ---> p54(如何派发事件)
+  JavaScript -----> p5(事件) ----->  p51(事件流)
+  p5 -----> p52(事件的三个阶段)
+  p5 -----> p53(事件的代理委托)
+  p5 -----> p54(如何派发事件)
 
-  JavaScript ---> p6(Event Loop) ---> p61(进程与线程)
-  p6 ---> p62(执行栈/js单线程)
-  p6 ---> p63(什么是 Event Loop)
-  p6 ---> p64(宏任务/微任务)
-  p6 ---> p65(浏览器与node的事件循环有什么区别)
+  JavaScript -----> p6(Event Loop) -----> p61(进程与线程)
+  p6 -----> p62(执行栈/js单线程)
+  p6 -----> p63(什么是 Event Loop)
+  p6 -----> p64(宏任务/微任务)
+  p6 -----> p65(浏览器与node的事件循环有什么区别)
 
-  JavaScript ---> p4(Promise) ---> p41(什么是 Promise)
-  p4 ---> P42(实现一个Promise)
-  p4 ---> p43(async 与 await)
+  JavaScript -----> p4(Promise) -----> p41(什么是 Promise)
+  p4 -----> P42(实现一个Promise)
+  p4 -----> p43(async 与 await)
 
-  JavaScript ---> p7(常用方法) ---> p71(数组方法)
-  p7 ---> p72(ES6新特性)
+  JavaScript -----> p7(常用方法) -----> p71(数组方法)
+  p7 -----> p72(ES6新特性)
 
-  JavaScript ---> p8(函数式编程) ---> p81(什么是函数式编程)
-  p8 ---> p82(如何进行函数式编程)
+  JavaScript -----> p8(函数式编程) -----> p81(什么是函数式编程)
+  p8 -----> p82(如何进行函数式编程)
 
-  JavaScript ---> p9(service worker) ---> p91(JavaScript如何工作的 Service Worker 的生命周期)
+  JavaScript -----> p9(service worker) -----> p91(JavaScript如何工作的 Service Worker 的生命周期)
 
-  JavaScript ---> p10(Web worker) ---> p10_1(什么是Web Worker)
+  JavaScript -----> p10(Web worker) -----> p10_1(什么是Web Worker)
 
-  JavaScript ---> p11_(浏览器缓存机制) ---> p11_1(浏览器的缓存机制)
-  p11_ ---> p11_2(缓存原理)
+  JavaScript -----> p11_(浏览器缓存机制) -----> p11_1(浏览器的缓存机制)
+  p11_ -----> p11_2(缓存原理)
 
-  JavaScript ---> p12_(浏览器渲染) ---> p12_1(浏览器渲染原理)
-  p12_ ---> P12_2(性能优化之减少重排重绘)
-  p12_ ---> P12_3(浏览器地址栏输入url后的全过程)
+  JavaScript -----> p12_(浏览器渲染) -----> p12_1(浏览器渲染原理)
+  p12_ -----> P12_2(性能优化之减少重排重绘)
+  p12_ -----> P12_3(浏览器地址栏输入url后的全过程)
 
-  JavaScript ---> p13_(数据处理) ---> p13_1(数组去重)
-  p13_ ---> p13_2(js原理题)
+  JavaScript -----> p13_(数据处理) -----> p13_1(数组去重)
+  p13_ -----> p13_2(js原理题)
 
-  JavaScript ---> p14_(ES6) ---> p14_1(新特性)
+  JavaScript -----> p14_(ES6) -----> p14_1(新特性)
 ```
 
 ## 1. 数据类型
@@ -1093,44 +1093,61 @@ module.exports = Promise;
   - `Tree` 上的每个 `Element`，也就是 `DOM` 节点，即 `Frame`。然后，计算每个 `Frame` 的位置，这又叫 `layout` 和 `reflow` 过程
   - 最后通过调用操作系统 `Native GUI` 的 `API` 绘制
 
+- DOM
+
+  - 从页面的角度来看，DOM 是渲染引擎用于渲染页面所需要的基础数据结构。
+
+  - 从 js 脚本的角度来看，DOM(文档对象模型)提供了一系列供 JavaScript 脚本操作 DOM 结构的 API 接口，基于这些接口我们可以用 js 对文档结构和样式自己内容进行修改。
+
+  - 从安全的角度来看，DOM 是一道安全防线，一些不安全的内容在 DOM 解析阶段就被阻止，从而避免其渲染到最终页面上。
+
+- DOM 树如何生成
+  - HTMLParser（HTML 解析器）
+    - 网络进程中接收到服务端返回的响应头之后，会读取响应头中的"Content-Type"字段，并根据该字段的值来判断本次请求服务器返回的是什么类型的数据，以 HTML 文档为例那么返回的应该是'text/html'。
+    - 如果是 HTML 文档，那么浏览器会创建一个渲染进程用于渲染页面
+    - 等待渲染进程创建好之后，网络进程和渲染进程之间会建立一个共享数据的管道，也就是跨进程通信。具体一点的说就是一个管道，网络进程这边接收到多少数据就源源不断的把数据传输到渲染进程，渲染进程接收到数据之后就将其转发给 HTMLParser。
+    - HTMLParser 接收到 HTML 字节流数据之后，就开始将 HTML 转化为 DOM 结构
+
 #### 9.1.2 渲染顺序
 
-- 当浏览器拿到一个网页后，首先浏览器会先解析HTML，如果遇到了外链的css，会一下载css，一边解析HTML
+- 当浏览器拿到一个网页后，首先浏览器会先解析 HTML，如果遇到了外链的 css，会一下载 css，一边解析 HTML
 
-- 当css下载完成后，会继续解析css，生成css Rules tree,`不会影响到HTML的解析`
+- 当 css 下载完成后，会继续解析 css，生成 `css Rules tree`,`不会影响到HTML的解析`
 
-- 当遇到`<script>`标签时，一旦发现有对javascript的引用，就会立即下载脚本，同时阻断文档的解析，等脚本执行完成后，再开始文档的解析
+- 当遇到`<script>`标签时，一旦发现有对 javascript 的引用，就会立即下载脚本，同时阻断文档的解析，等脚本执行完成后，再开始文档的解析
 
-- 当DOM树和CSS规则树已经生成完毕后，构造 Rendering Tree
+- 当 DOM 树和 CSS 规则树已经生成完毕后，构造 `Rendering Tree`
 
 - 调用系统渲染页面
 
-#### 9.1.3 浏览器地址栏里输入URL后的全过程
+## 9.2 浏览器地址栏里输入 URL 后的全过程
 
-- 什么是URL
-  - URL是统一资源定位符（Uniform Resource Locator），是资源标识最常见的形式。URL描述了一台特定服务器上某资源的特定位置。它们可以明确说明如何从一个精确、固定的位置获取资源。
+- 什么是 URL
 
-  - URL说明了协议、服务器和本地资源。
+  - `URL` 是统一资源定位符（Uniform Resource Locator），是资源标识最常见的形式。URL 描述了一台特定服务器上某资源的特定位置。它们可以明确说明如何从一个精确、固定的位置获取资源。
 
-  - 而浏览器都是基于HTTP协议，而HTTP是个应用层的协议。HTTP无需操心网络通信的具体细节都交给了TCP/IP。
+  - URL 说明了协议、服务器和本地资源。
+
+  - 而浏览器都是基于 HTTP 协议，而 HTTP 是个应用层的协议。HTTP 无需操心网络通信的具体细节都交给了 TCP/IP。
 
   - TCP:
+
     - 无差错的数据传输。
     - 按序传输（数据总是按照发送的顺序到达）。
     - 未分段的数据流（可以在任意时刻将数据发送出去）。
 
-  - HTTP协议位于TCP的上层。HTTP使用TCP来传输其报文数据。
+  - HTTP 协议位于 TCP 的上层。HTTP 使用 TCP 来传输其报文数据。
 
-- 解析URL
+- 解析 URL
 
-  - 当用户输入一个完整的URL之后，浏览器就开始解析URL的构成，以便于查找资源地址
-  - URL最重要的3个部分是方案scheme，主机host和路径path。如果URL中不包含port，浏览器会默认使用80端口进行访问
+  - 当用户输入一个完整的 URL 之后，浏览器就开始解析 URL 的构成，以便于查找资源地址
+  - URL 最重要的 3 个部分是方案 `scheme`，主机 `host` 和路径 `path`。如果 URL 中不包含 port，浏览器会默认使用 80 端口进行访问
 
 - DNS 域名解析
 
-  - 什么是DNS
+  - 什么是 DNS
 
-    - `DNS( Domain Name System)`是“域名系统”的英文缩写，DNS是应用层协议，事实上他是为其他应用层协议工作的，包括不限于HTTP和SMTP以及FTP，用于将用户提供的主机名解析为ip地址
+    - `DNS( Domain Name System)`是“域名系统”的英文缩写，DNS 是应用层协议，事实上他是为其他应用层协议工作的，包括不限于 HTTP 和 SMTP 以及 FTP，用于将用户提供的主机名解析为 ip 地址
 
 - 建立 TCP 连接
 
@@ -1138,3 +1155,801 @@ module.exports = Promise;
   - 四次挥手
 
 - 页面渲染
+
+### 9.3 JavaScript 是如何影响 DOM 树生成的
+
+#### 9.3.1 body 中内嵌 JS 脚本
+
+- 在 `script` 标签之前的解析流程是正常的，但是一旦分词器产生了一个 `StartTag script` ,也就是解析到一个 script 标签的时候，渲染引擎判断这是一段 js 脚本，此时 HTML 解析器会暂时停止 DOM 解析,因为 js 可以修改当前已经生成的 DOM 结构。此时专门用于解析 js 代码的 V8 引擎介入，开始解析执行这段 js 脚本，等待 js 脚本执行完成之后，HTML 解析器开始继续解析后续的内容。
+
+#### 9.3.2 body 中引入了外部 JS 文件
+
+- HTML 解析器在解析到 script 标签的时候，暂停 DOM 的解析，然后 js 解析引擎开始执行 js 脚本。但是和上面内嵌脚本不一样的是需要被解析执行的 js 脚本是外部文件，所以需要先下载 js 代码然后才可以执行。所以相比较上面的情况，这里又多了一个 JavaScript 脚本的下载过程，而下载又会受到网络环境、当前 js 文件的大小这些因素的影响，所以 js 脚本的下载也会影响 DOM 的解析。
+
+- 针对于上面这种外部引入 js 代码的情况，Chrome 浏览器对其做了一定的优化，一个主要的优化就是预解析操作。什么是预解析操作呢？就是当渲染引擎收到 HTML 文档之后，首先会开启一个预解析线程来扫描 HTML 文件中包含的 JavaScript、CSS 等文件，如果确实有这些文件，那么避免后面 DOM 解析的时候下载这些资源消耗过多时间，预解析线程此时就会去下载这些文件。
+
+#### 9.3.3 如何优化 HTML 文档中的 JS 代码阻塞 DOM 解析
+
+- 压缩 js
+- 使用 CDN 来加速 JS 文件的加载
+- 如果当前 js 代码中没有操作 DOM 的代码，将该 js 脚本设置为异步加载，来避免阻塞
+- 将脚本文件放在页面最底端，等待 DOM 树构建完成之后再加载 JS 脚本
+
+#### 9.3.3 如何设置 JS 异步加载
+
+- script 标签有两个属性，`async` 和 `defer`,通过给 script 标签来设置这两个属性就可以启用异步加载。
+
+- async 的作用
+
+  - 并行下载脚本，不阻塞 DOM 的解析和 DOM 树的构建
+  - 等待脚本加载完成之后立即执行
+  - 多个加了 async 的脚本执行顺序是不可确定的
+  - 执行时机不可确定，但是一定在 load 事件派发之前,执行的时候有可能 DOM 还没有解析完成，所以这时候如果 js 脚本中包含了操作 DOM 的代码就会引起 DOM 结构的变化
+
+- defer 的作用
+  - 并行下载脚本，不阻塞 HTML 的解析和 DOM 树的构建
+  - 脚本加载好之后不会立即执行，而是一定会等待 HTML 解析完成之后才开始执行
+  - 多个加了 defer 的脚本执行顺序为自上到下依次执行
+  - 一定会在文档的 DOMContentLoaded 事件触发之前执行
+
+### 9.4 CSS 是如何影响 DOM 树生成的
+
+#### 9.4.1 什么是 CSSOM（CSS 树）
+
+- 和 HTML 文档一样，浏览器的渲染引擎也是无法直接理解 CSS 文件内容的，所以需要先将 CSS 文本转化成为渲染引擎可以理解的数据结构，这个数据结构就被称之为 CSSOM。CSSOM 具有下面两个含义：
+
+  - 从渲染页面的视角来看，CSSOM 为页面的渲染提供了基础的样式信息。
+  - 从 js 脚本的视角来看，CSSOM 为 JavaScript 操作 DOM 节点的样式提供了能力。
+
+- CSSOM 具体的体现在 DOM 中就是 document.styleSheets,它的数据结构是一个数组列表，列表中的每一项都是一个个的对象，指定了一系列 CSS 样式渲染的规则和信息。
+
+#### 9.4.2 渲染过程中涉及到 CSS 部分
+
+- 构建 DOM 树
+  - 渲染引擎将 HTML 解析为 DOM 树
+- 构架 CSSOM 树
+  - 渲染引擎将 CSS 解析为 CSSOM 树
+- 样式计算
+  - 渲染引擎计算每一个 DOM 节点的样式，保存在元素的 computedStyle 中，可基于方法 window.getComputedStyle(ele，null)查询
+- 计算布局
+  - 渲染引擎计算布局树中每一个元素对应位置
+- 合成布局树
+  - 基于 DOM 树和 CSSOM 树合成`render tree`布局树，相当于 DOM 树过滤掉`head` 和 `diplay：none`
+
+#### 9.4.3 CSS 文件是如何间接影响到 DOM 解析的
+
+- HTML 解析遇到 script 内嵌脚本，暂停 DOM 解析
+- 在执行 js 代码之前先等待 index.css 中文件解析为 CSSOM
+- js 解析引擎开始解析执行 js 脚本内代码
+- 解析到 div1.style.color = 'red'代表要操作 CSSOM 对象,基于 DOM 接口操作节点样式的前提是有 CSSOM
+- js 代码执行完毕
+- 继续进行 HTML 的解析，构建 DOM 树
+
+- 不管是内联的 CSS 文件还是外部引入的 CSS 层叠样式表，有一个前提就是如果解析 HTML 文档的时候页面中有 script 脚本，那么在 script 脚本的执行需要等待当前文档中的 CSS 文本被渲染引擎解析成为 CSSOM 这种结构之后，V8 引擎中的 JS 代码才可以开始执行，因为 V8 引擎在执行 js 代码之前，是并不知道 js 代码要操作 css 样式的。执行完成之后才可以继续进行后续的 DOM 解析，总的来说就是 script 脚本的加载和执行会阻塞 DOM 解析，而 CSS 文件又会阻塞 JS 脚本的执行，所以 CSS 文件也是会间接的影响 DOM 的解析，从而影响布局树的合成，最终影响渲染流水线。
+- 如果在预解析的过程中，HTML 预解析器发现有 CSS 外部文件和 JS 外部文件需要加载，那么此时会同时发起请求 CSS 文件和 JS 文件的请求，所以下载时间要按照下载最久的那个算。
+
+### 9.5 优化思路
+
+- 内联 CSS 和内联 JS，移除下载这两个文件的时间
+- 如果不内联，那么就尽量减小文件的大小，比如 webpack 在打包的时候压缩文件
+- 给 js 代码加上 async 和 defer 属性，不要让 js 的执行阻塞 DOM 解析
+- 基于媒体查询，识别当前页面呈现的场景，在不同的场景下加载不同的 CSS 文件
+
+### 9.6 如何减少重排重绘
+
+- 尽量避免 style 的使用，对于需要操作 DOM 元素节点，重新命名 className，更改 className 名称。
+- 如果增加元素或者 clone 元素，可以先把元素通过 documentFragment 放入内存中，等操作完毕后，再 appendChild 到 DOM 元素中。
+- 不要经常获取同一个元素，可以第一次获取元素后，用变量保存下来，减少遍历时间。
+- 尽量少使用 dispaly:none，可以使用 visibility:hidden 代替，dispaly:none 会造成重排，visibility:hidden 会造成重绘。
+- 不要使用 Table 布局，因为一个小小的操作，可能就会造成整个表格的重排或重绘。
+- 使用 resize 事件时，做防抖和节流处理。
+- 对动画元素使用 absolute / fixed 属性。
+- 批量修改元素时，可以先让元素脱离文档流，等修改完毕后，再放入文档流。
+
+### 9.7 几个问题
+
+- 问题 1：内嵌的 JS 脚本和外部 JS 文件会阻塞 DOM 解析和页面渲染么？
+
+  - 会的。因为只要是 HTML 解析遇到 script 标签的时候会停止解析，等到 js 脚本执行完毕之后继续解析，如果是外部的 js 文件还需要等待下载好之后才可以执行 js 代码。
+
+- 问题 2：为什么我们一般情况下要将页面的 script 标签放置在 body 元素的最底端？
+
+  - 原因主要有两个：第一个是为了避免放在顶部或者中间阻塞 DOM 的解析，影响构建 DOM 树的时间；第二个主要是为了避免 js 脚本中有操作 DOM 的代码，在 DOM 树生成一半的时候操作了 DOM，将之前已经构建好的 DOM 树修改导致 DOM 树的重新生成，引起回流和重绘。
+
+- 问题 3：script 标签的 async 和 defer 都是做什么用的?
+
+  - 都是为了避免阻塞 DOM 解析，来异步下载 JS 文件的。不同之处在于 async 会在 js 脚本加载完成之后立即执行；而 defer 会等待 DOM 树构建完成之后，也就是 DOMContentLoaded 事件触发之前才开始执行。
+
+- 问题 4：内嵌的 CSS 样式和外部 CSS 文件会阻塞 DOM 解析和页面渲染么？
+
+  - 会的。只不过是间接的影响，因为一旦页面中既包含了 JS 文件和 CSS 文件，那么浏览器一定会等到 CSS 文件加载成为 CSSOM 之后，才开始执行 JS 脚本，而 JS 脚本又会阻塞 DOM 的解析，如果 JS 代码在文档底部，那么 CSS 不会阻塞 DOM 的解析，但是会阻塞页面的渲染。
+
+- 问题 5：为什么我们一般情况下要将 CSS 文件放在 head 元素下？
+
+  - 如果 CSS 文件放在页面 body 的中间或者底部，前面的 DOM 节点样式已经生成了，此时解析到 CSS 文件会构建 CSSOM 树，此时会重新进行 DOM 节点的样式计算，引起渲染流水线的重绘操作。
+  - 如果放在 Head 标签下的时候，浏览器在开始解析 body 前总是会先解析 CSS 并生成 CSSDOM，后续只有 JS 可以修改样式，避免了二次计算样式的问题。
+
+- 问题 6：DOMContentLoaded 事件的执行时机到底是怎样的？
+  - DOM 树构建完成之后，此事件会触发
+
+## 10. 函数式编程
+
+### 10.1 什么是函数式编程
+
+- 定义
+
+  - 是一种编程范型，它将电脑运算视为数学上的函数计算，并且避免使用程序状态以及易变对象。函数编程语言最重要的基础是 λ 演算（lambda calculus）。而且 λ 演算的函数可以接受函数当作输入（引数）和输出（传出值）。比起命令式编程，函数式编程更加强调程序执行的结果而非执行的过程，倡导利用若干简单的执行单元让计算结果不断渐进，逐层推导复杂的运算，而不是设计一个复杂的执行过程。
+
+- 特性
+
+  - 函数是一等公民
+  - 不可变量
+  - 纯函数
+  - 引用透明
+  - 惰性计算
+
+## 11. Web Worker
+
+- Web Worker 简介
+
+  - Web Worker 是 HTML5 标准的一部分，这一规范定义了一套 API，它允许一段 JavaScript 程序运行在主线程之外的另外一个线程中。值得注意的是， Web Worker 规范中定义了两类工作线程，分别是专用线程 Dedicated Worker 和共享线程 Shared Worker，其中，Dedicated Worker 只能为一个页面所使用，而 Shared Worker 则可以被多个页面所共享
+
+- 用途
+
+  - 懒加载
+  - 文本分析
+  - 流媒体数据处理
+  - canvas 图形绘制
+  - 图像处理
+
+- 创建 worker
+
+  - 只需要调用 Worker() 构造函数并传入一个要在 worker 线程内运行的脚本 URI，即可创建一个新的 worker
+  - 另外，通过 URL.createObjectURL()创建 URL 对象，可以实现创建内嵌的 worker
+
+- worker 线程数据通信方式
+  - Worker 与其主页面之间的通信是通过 onmessage 事件和 postMessage() 方法实现的。
+  - Worker 与其主页面之间只能单纯的传递数据，不能传递复杂的引用类型：如通过构造函数创建的对象等。并且，传递的数据也是经过拷贝生成的一个副本，在一端对数据进行修改不会影响另一端。
+
+## 11. Service Worker
+
+## 12. 数据处理
+
+### 12.1 数组去重
+
+```js
+// 1. 循环
+Array.prototype.unique = function () {
+  const newArray = [];
+  let isRepeat;
+  for (let i = 0; i < this.length; i++) {
+    isRepeat = false;
+    for (let j = 0; j < newArray.length; j++) {
+      if (this[i] === newArray[j]) {
+        isRepeat = true;
+        break;
+      }
+    }
+    if (!isRepeat) {
+      newArray.push(this[i]);
+    }
+  }
+  return newArray;
+};
+
+//2. indexOf
+Array.prototype.unique = function () {
+  return this.filter((item, index) => {
+    return this.indexOf(item) === index;
+  });
+};
+
+// 3. sort
+Array.prototype.unique = function () {
+  const newArray = [];
+  this.sort();
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] !== newArray[newArray.length - 1]) {
+      newArray.push(this[i]);
+    }
+  }
+  return newArray;
+};
+
+// 4. includes
+Array.prototype.unique = function () {
+  const newArray = [];
+  this.forEach((item) => {
+    if (!newArray.includes(item)) {
+      newArray.push(item);
+    }
+  });
+  return newArray;
+};
+
+// 5. reduce
+Array.prototype.unique = function () {
+  return this.sort().reduce((init, curr) => {
+    if (init.length === 0 || init[init.length - 1] !== curr) {
+      init.push(curr);
+    }
+  }, []);
+};
+
+// 6. Map
+Array.prototype.unique = function () {
+  const map = new Map();
+  return this.filter((item) => {
+    return !map.has(item) && map.set(item, 1);
+  });
+};
+
+// 7. Set
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+```
+
+### 12.2 一些常见函数
+
+```js
+// 1. call
+Function.prototype.call = function() {
+  if (typeof this !== 'function') {
+    throw new Error('not a function')
+  }
+  let args = [...arguments]
+  let _this = args.shift()
+  _this.fn = this
+  let res = _this.fn(...args)
+  delete _this.fn
+  return res
+}
+
+// 2. apply
+Function.prototype.apply = function () {
+  if (typeof this !== 'function') {
+    throw new Error('not a function')
+  }
+  let args = [...arguments]
+  let _this = args.shift()
+  _this.fn = this
+  let res = _this.fn(args)
+  delete _this.fn
+  return res
+}
+
+// 3. bind
+Function.prototype.bind = function () {
+  if (typeof this !== 'function') {
+    throw new Error('not a function')
+  }
+  let args = [...arguments]
+  let _this = args.shift()
+  let res = this
+  return () => res.apply(_this, args)
+}
+
+// 4. Object.create
+function create(obj) {
+  function F() {}
+  F.prototype = obj
+  return new F()
+}
+
+// 5. new
+function new (fun) {
+  return function () {
+    let obj = {
+      __proto__: fun.prototype
+    }
+    fun.call(obj, ...arguments)
+    return obj
+  }
+}
+
+// 6. deepClone
+function deepClone(obj) {
+  if (typeof obj !== 'object' || obj == null) {
+    return obj
+  }
+  let res = Array.isArray(obj) ? [] : {}
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      obj[key] = deepClone(obj[key])
+    }
+  }
+  return res
+}
+
+function deepClone(obj) {
+  return JSON.parse(JSON.stringify(obj))
+}
+
+// 7. 四种继承
+function A() {}
+
+// 7.1 原型链继承
+function B() {}
+B.prototype = new A()
+B.prototype.constructor = B
+
+// 7.2 this
+function B() {
+  constructor() {
+    a.call(this)
+  }
+}
+B.prototype.constructor = B
+
+// 7.3 组合式继承
+function B() {
+  constructor() {
+    A.call(this)
+  }
+}
+B.prototype = new A()
+B.prototype.constructor = B
+
+// 7.4 寄生式组合继承
+function B() {
+  constructor() {
+    A.apply(this, arguments)
+  }
+}
+B.prototype = Object.create(A.prototype)
+B.prototype.constructor = B
+
+// 8. event bus
+class Bus {
+  constructor() {
+    this.events = this.events || new Map()
+  }
+
+  publish(type, ...args) {
+    this.events.get(type) && this.events.get(type).forEach(callback => callback(...args))
+  }
+
+  subscribe(type, callback) {
+    if (!this.events.get(type)) {
+      this.events.set(type, [])
+    }
+    this.events.set(type, this.events.get(type).push(callback))
+  }
+}
+
+// 9. 数据双向绑定
+const obj = {}
+const div = document.getElementById('div')
+const input = document.getElementById('input')
+
+// 9.1 defineProperty
+Object.defineProperty(obj, 'text', {
+  configurable: true,
+  enumerable: true,
+  get() {
+    console.log('got data')
+  },
+  set(value) {
+    input.value = value
+    div.innerHTML = value
+  }
+})
+
+// proxy
+obj = new Proxy(obj, {
+  get(obj, prop, value) {
+    console.log(value)
+  },
+  set(obj, prop, value) {
+    if (prop === 'text') {
+      obj[prop] = value
+      input.value = value
+      div.innerHTML = value
+    }
+  }
+})
+
+input.addEventListener('keyup', (e) => {
+  obj.text = e.target.value
+})
+
+// 10. router
+
+// 10.1 hash
+class HashRoute {
+  constructor() {
+    this.routes = {}
+    this.currentHash = ''
+    this.freshRoute = this.freshRoute.bind(this)
+
+    window.addEventListener('hashChange', this.freshRoute, false)
+    window.addEventListener('contentLoad', this.freshRoute, false)
+  }
+
+  storeRoute(path, cb) {
+    this.routes[path] = cb || function () {}
+  }
+
+  refreshRoute () {
+    this.currentHash = location.hash,slice(1) || '/'
+    this.routes[this.currentHash]()
+  }
+}
+
+// 10.2 history
+function onLoad () {
+  routerView.innerHTML = location.pathname
+  let linklist = document.querySelectorAll('a[href]')
+  linklist.forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault()
+      history.pushState(null, '', el.getAttribute('href'))
+      routerView.innerHTML = location.pathname
+    })
+  })
+}
+
+class HistoryRoute {
+  constructor() {
+    this.routes = {}
+    this.pathname = ''
+    this.freshRoute = this.freshRoute.bind(this)
+
+    window.addEventListener('DOMContentLoaded', this.onLoad)
+    window.addEventListener('popstate', this.refreshRoute)
+  }
+
+  refreshRoute() {
+    this.pathname = location.pathname || '/'
+  }
+
+  onLoad() {
+    let links = document.querySelectorAll('a[href]')
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault()
+        history.pushState(null, '', link.getAttribute('href'))
+        this.refreshRoute()
+      })
+    })
+  }
+}
+
+// 11. 图片懒加载
+function asyncLoadImg(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => {
+      resolve(url)
+    }
+    img.onerror = () => {
+      reject(new Error('error'))
+    }
+    img.src = url
+  })
+}
+
+// 12. ajax
+function ajax(options) {
+  const {url, method, async, data, timeout}
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest()
+    xhr.open(method.oLocaleLowerCase() || 'get', url, async)
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          resolve(JSON.parse(xhr.responseText))
+        } else if (xhr.status === 404) {
+          reject(new Error('error 404 not found'))
+        }
+      }
+    }
+    if (method === 'get') xhr.send(null) elde {
+      xhr.setRequestHeader('Content-Type', 'application/json')
+      xhr.send(data)
+    }
+  }
+}
+
+// 13. drag
+window.onload = function () {
+  // drag处于绝对定位状态
+  let drag = document.getElementById('box')
+  drag.onmousedown = function(e) {
+    var e = e || window.event
+    // 鼠标与拖拽元素边界的距离 = 鼠标与可视区边界的距离 - 拖拽元素与边界的距离
+    let diffX = e.clientX - drag.offsetLeft
+    let diffY = e.clientY - drag.offsetTop
+    drag.onmousemove = function (e) {
+      // 拖拽元素移动的距离 = 鼠标与可视区边界的距离 - 鼠标与拖拽元素边界的距离
+      let left = e.clientX - diffX
+      let top = e.clientY - diffY
+      // 避免拖拽出可视区
+      if (left < 0) {
+        left = 0
+      } else if (left > window.innerWidth - drag.offsetWidth) {
+        left = window.innerWidth - drag.offsetWidth
+      }
+      if (top < 0) {
+        top = 0
+      } else if (top > window.innerHeight - drag.offsetHeight) {
+        top = window.innerHeight - drag.offsetHeight
+      }
+      drag.style.left = left + 'px'
+      drag.style.top = top + 'px'
+    }
+    drag.onmouseup = function (e) {
+      this.onmousemove = null
+      this.onmouseup = null
+    }
+  }
+}
+
+// 14. debouce
+function debounce(fn, delay) {
+  let timer
+  return () => {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(fn, delay)
+  }
+}
+
+// 15. throttle
+function throttle(fn, delay) {
+  let timer
+  return () => {
+    if (!timer) {
+      setTimeout(() => {
+        fn()
+        clearTimeout(timer)
+      }, delay)
+    }
+  }
+}
+
+// 16. 事件绑定
+function bindEvent(elem, type, selector, fn) {
+  if (fn == null) {
+    fn = selector
+    selector = null
+  }
+  elem.addEventListener(type, event => {
+    const target = event.target
+    if (selector) {
+      // 代理
+      if (target.matches(selector)) {
+        fn.call(target, event)
+      }
+    } else {
+      // 普通
+      fn.call(target, event)
+    }
+  })
+}
+
+// 17. flat
+Array.prototype.flat = function(depth = 1) {
+  if (typeof this !== 'array') {
+    throw new Error('not a array')
+  }
+  if (depth < 1 || !this.some(item => item instanceof Array)) {
+    return this
+  }
+  let res = Array.prototype.concat.apply([], [])
+  return depth === Infinity ? res.flat(Infinity) : res.flat(depth - 1)
+}
+
+// 18 axios 
+import originAxios from 'axios'
+
+const Service = originAxios.create({
+  baseURL: '/api',
+  timeout: 5000
+})
+
+Service.interceptors.request.use(config => {
+  return config
+}, err => {
+  return Promise.reject(err)
+})
+
+Service.interceptors.response.use(res => {
+  return res
+}, err => {
+  return Promise.reject(err)
+})
+
+export default Service
+
+// 19 jQuery
+class JQuery {
+  constructor(selector) {
+    const result = document.querySelectorAll(selector)
+    const length = result.length
+    for (let i = 0; i < length; i++) {
+      this[i] = result[i]
+    }
+    this.length = length
+    this.selector = selector
+  }
+  get(index) {
+    return this[index]
+  }
+  each(fn) {
+    for (let i = 0; i < this.length; i++) {
+      const elem = this[i]
+      fn(elem)
+    }
+  }
+  on(type, fn) {
+    return this.each(elem => {
+      elem.addEventListener(type, fn, false)
+    })
+  }
+}
+
+// 20. sort
+// 20.1
+// 冒泡排序
+function bubbleSort(arr) {
+  if (!Array.isArray(arr)) {
+    return false
+  }
+  let len = arr.length
+  for (let i = 0; i < len - 1; i++) {
+    for (let j = 0; j < len - 1 - i; j++) {
+      if (arr[j] > arr[j + 1]) {
+        let temp = arr[j + 1]
+        arr[j + 1] = arr[j]
+        arr[j] = temp
+      }
+    }
+  }
+  return arr
+}
+
+// 选择排序 
+function selectionSort(arr) {
+  if (!Array.isArray(arr)) {
+    return false
+  }
+  let len = arr.length
+  let minIndex, temp
+  for (let i = 0; i < len - 1; i++) {
+    minIndex = i
+    for (let j = i + 1; j < len; j++) {
+      if (arr[j] < arr[minIndex]) {
+        minIndex = j
+      }
+    }
+    temp = arr[i]
+    arr[i] = arr[minIndex]
+    arr[minIndex] = temp
+  }
+  return arr
+}
+
+// 插入排序
+function insertionSort(arr) {
+  if (!Array.isArray(arr)) {
+    return false
+  }
+  let len = arr.length
+  let preIndex, current
+  for (let i = 0; i < len; i++) {
+    preIndex = i - 1
+    current = arr[i]
+    while(preIndex >= 0 && arr[preIndex] > current) {
+      arr[preIndex + 1] = arr[preIndex]
+      preIndex--
+    }
+    arr[preIndex + 1] = current
+  }
+  return arr
+}
+
+// 归并排序
+function mergeSort(arr) {
+  if (!Array.isArray(arr)) {
+    return false
+  }
+  let len = arr.length
+  if (len < 2) {
+    return arr
+  }
+  let middle = Math.floor(len / 2)
+  let left = arr.slice(0, middle)
+  let right = arr.slice(middle)
+  return merge(mergeSort(left), mergeSort(right))
+}
+
+function merge(left, right) {
+  let result = []
+  while (left.length && right.length) {
+    if (left[0] < right[0]) {
+      result.push(left.shift())
+    } else {
+      result.push(right.shift())
+    }
+  }
+
+  while (left.length) {
+    result.push(left.shift())
+  }
+
+  while (right.length) {
+    result.push(right.shift())
+  }
+
+  return result
+}
+
+// 快速排序
+function quickSort(arr, low, high) {
+  if (!Array.isArray(arr) || low > high) {
+    return false
+  }
+  let piovt = arr[low]
+  let i = low
+  let j = high
+  while (i < j) {
+    while (arr[j] >= piovt && j > i) {
+      j--
+    }
+    arr[i] = arr[j]
+    while (arr[i] < piovt && j > i) {
+      i++
+    }
+    arr[j] = arr[i]
+  }
+
+  arr[i] = piovt
+  quickSort(arr, low, i - 1)
+  quickSort(arr, i + 1, high)
+  return arr
+}
+```
+
+## 13. ES6新特性
+
+### ES6
+
+- 类（class）
+- 模块化（Module）
+  - 导出（export）
+  - 导入（import）
+- 箭头函数
+- 参数默认值
+- 模板字符串
+- 解构赋值
+- 延展操作符（...， 同时支持对象）
+- 对象属性简写
+- Promise
+- let const
+
+### ES7
+
+- Array.prototype.includes()
+- 指数操作符（**）
+
+### ES8
+
+- async/await
+- Object.values()
+  - `Object.values()`是一个与Object.keys()类似的新函数，但返回的是Object自身属性的所有值，不包括继承的值。
+- Object.entries()
+  - `Object.entries()`函数返回一个给定对象自身可枚举属性的键值对的数组。
+- String padding
+  - 在ES8中String新增了两个实例函数`String.prototype.padStart`和`String.prototype.padEnd`，允许将空字符串或其他字符串添加到原始字符串的开头或结尾。
+  - `String.padStart(targetLength,[padString])`
+    - `targetLength`:当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身。
+    - `padString`:(可选)填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断，此参数的缺省值为 " "。
+  - `String.padEnd(targetLength,padString])`
+    - `targetLength`:当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身。
+    - `padString`:(可选) 填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断，此参数的缺省值为 " "
+- 函数参数列表结尾允许逗号
+- Object.getOwnPropertyDescriptors()
+  - `Object.getOwnPropertyDescriptors()`函数用来获取一个对象的所有自身属性的描述符,如果没有任何自身属性，则返回空对象。
