@@ -1953,3 +1953,4 @@ function quickSort(arr, low, high) {
 - 函数参数列表结尾允许逗号
 - Object.getOwnPropertyDescriptors()
   - `Object.getOwnPropertyDescriptors()`函数用来获取一个对象的所有自身属性的描述符,如果没有任何自身属性，则返回空对象。
+  
