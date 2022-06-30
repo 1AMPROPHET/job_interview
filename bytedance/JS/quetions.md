@@ -26,7 +26,7 @@
   - bigint
 
 - 引用类型
-  - Abject
+  - Object
   - Array
   - Function
 
@@ -73,7 +73,7 @@
   - 严格模式下时undefined
   - 使用call、apply、bind绑定的，指的是绑定的对象
 
-- 建有函数this
+- 箭头函数this
   - 箭头函数会捕获其所在上下文的this，自己本身没有this
   - this无法改变
   - 箭头函数作为匿名函数不能作为构造函数，不能使用new

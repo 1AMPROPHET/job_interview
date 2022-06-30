@@ -21,3 +21,17 @@ Array.prototype.myFlat = function (depth = 1) {
   const res = Array.prototype.concat.apply([], this)
   return depth === Infinity ? res.myFlat(Infinity) : res.myFlat(depth - 1)
 }
+
+Array.prototype.reduceFlat = function (depth = 1) {
+  if (!Array.isArray(this)) return
+  if (depth === 0 || !this.some(item => item instanceof Array)) return this
+  return this.reduce((pre, cur) => {
+    if (depth === Infinity) {
+      return [...pre, ...cur.reduceFlat(Infinity)]
+    } else if (Array.isArray(cur)) {
+      return [...pre, ...cur.reduceFlat(depth - 1)]
+    } else {
+      return [...pre, cur]
+    }
+  })
+}
