@@ -26,6 +26,19 @@ flowchart TD
   - 盒子总宽度：width + margin
   - 盒子总高度：height + margin
 
+- 块级盒子
+
+  - 盒子会在内联的方向上扩展并占据父容器在该方向上的所有可用空间，在绝大数情况下意味着盒子会和父容器一样宽
+  - 每个盒子都会换行
+  - width 和 height 属性可以发挥作用
+  - 内边距（padding）, 外边距（margin） 和 边框（border） 会将其他元素从当前盒子周围“推开”
+
+- 内联盒子
+  - 盒子不会产生换行。
+  - width 和 height 属性将不起作用。
+  - 垂直方向的内边距、外边距以及边框会被应用但是不会把其他处于 inline 状态的盒子推开。
+  - 水平方向的内边距、外边距以及边框会被应用且会把其他处于 inline 状态的盒子推开。
+
 ## 2. position
 
 ### 2.1 position 类型
@@ -151,3 +164,208 @@ flowchart TD
   - 利用 BFC 避免 margin 重叠
   - 自适应两栏布局
   - 清除浮动
+
+## 5. CSS3 动画
+
+### 5.1 transform
+
+- `transform`可以用来设置元素的形状改变，主要有以下几种变形：`rotate`（旋转）、`scale`（缩放）、`skew`（扭曲）、`translate`（移动）和 `matrix`（矩阵变形）
+
+```css
+.transform-class {
+  transform ： none | <transform-function> [ <transform-function> ]*
+}
+```
+
+- `none`表示不做变换；`<transform-function>`表示一个或多个变化函数，变化函数由函数名和参数组成，参数包含在()里面，用空格分开，例如：
+
+```CSS
+.transform-class {
+  transform ： rotate(30deg) scale(2,3);
+}
+```
+
+- transform-origin 基点
+  - 所有的变形都是基于基点，基点默认为元素的中心点
+
+  ```CSS
+  .transform-class {
+    transform-origin: (left, bottom);
+  }
+  ```
+
+- rotate
+  - 表示通过指定的角度对元素进行旋转变形，如果是正数则顺时针旋转，如果是负数则逆时针旋转
+
+  ```CSS
+  .transform-rotate {
+    transform: rotate(30deg);
+  }
+  ```
+
+- scale
+  - 它有三种用法：`scale(<number>[, <number>])`、`scaleX(<number>)`和`scaleY(<number>)`；分别代表水平和垂直方向同时缩放、水平方向的缩放以及垂直方向的缩放，入参代表水平或者垂直方向的缩放比例
+
+  ```CSS
+  .transform-scale {
+    transform: scale(2,1.5);
+  }
+
+  .transform-scaleX {
+    transform: scaleX(2);
+  }
+
+  .transform-scaleY {
+    transform: scaleY(1.5);
+  }
+  ```
+
+- translate
+  - 移动也分三种情况：`translate(<translation-value>[, <translation-value>])`、`translateX(<translation-value>)`和`translateY(<translation-value>)`；分别代表水平和垂直的移动、水平方向的移动以及垂直方向同时移动，移动单位是 CSS 中的长度单位：px、rem等
+
+  ```CSS
+  .transform-translate {
+    transform: translate(400px, 20px);
+  }
+
+  .transform-translateX {
+    transform: translateX(300px);
+  }
+
+  .transform-translateY {
+    transform: translateY(20px);
+  }
+  ```
+
+- skew
+  - 扭曲同样也有三种情况，`skew(<angle>[, <angle>])`、`skewX(<angle>)`和`skewY(<angle>)`；同样也是水平和垂直方向同时扭曲、水平方向的扭曲以及垂直方向的扭曲，单位为角度
+
+  ```CSS
+  .transform-skew {
+    transform: skew(30deg, 10deg);
+  }
+
+  .transform-skewX {
+    transform: skewX(30deg);
+  }
+
+  .transform-skewY {
+    transform: skewY(10deg);
+  }
+  ```
+
+- matrix
+
+### 5.2 transition
+
+- `transition`是用来设置样式的属性值是如何从从一种状态变平滑过渡到另外一种状态，它有四个属性：
+  - transition-property（变换的属性，即那种形式的变换：大小、位置、扭曲等）；
+  - transition-duration（变换延续的时间）；
+  - transition-timing-function（变换的速率）
+  - transition-delay（变换的延时）
+
+### 5.3 animation
+
+- @keyframes
+- animation-name
+- animation-duration
+- animation-timing-function
+- animation-delay
+- animation-iteration-count
+- animation-direction
+- animation-play-state
+- animation
+
+### 5.4 移动端1px解决方案
+
+- 采用meta viewport 的方式（只针对移动端）
+
+```HTML
+<meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5"/>
+```
+
+- 采用 transform：scale()
+
+```CSS
+transform: scale(0.5,0.5);
+```
+
+## 6. 预处理器
+
+### 6.1 主要的几种预处理器
+
+- Sass
+- Less
+- Stylus
+
+### 6.2 优点
+
+- 虽然各种预处理器功能强大，但使用最多的，还是以下特性
+  - 变量（variables）
+  - 代码混合（mixins）
+  - 嵌套（nested rules）
+  - 代码模块化（Modules）
+
+### 6.3 缺点
+
+- 额外的编译配置
+- 编译成本
+- 学习成本
+- 调试
+
+## 7. CSS3 新特性
+
+### 7.1 新选择器
+
+- :first-of-type
+- :last-of-type
+- :only-of-type
+- :only-child
+- :nth-child
+- :nth-last-child
+- :nth-of-type
+- :last-child
+
+### 7.2 新样式
+
+- border-radius
+- box-shadow
+- border-image
+
+### 7.3 背景
+
+- background-clip
+- background-origin
+- background-size
+- background-break
+
+### 7.4 文字
+
+- word-wrap
+- text-overflow
+- text-shadow
+- text-decoration
+
+### 7.5 颜色
+
+- rgba
+- hsla
+
+### 7.6 transition
+
+### 7.7 transform
+
+### 7.8 animation
+
+### 7.9 渐变
+
+- linear-gradient
+- radial-gradient
+
+### 7.10 flex
+
+### 7.11 grid
+
+### 7.12 媒体查询
+
+### 7.13 混合模式

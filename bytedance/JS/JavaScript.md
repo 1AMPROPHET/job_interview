@@ -146,8 +146,8 @@ javascript 的数据类型、数据检查、深浅拷贝，是 js 最基础的�
 - Symbol 的作用
   - 表示一个独一无二的变量防止命名冲突
   - symbol 不可枚举，可以用来模拟私有变量
-  - 提供遍历接口，symbol.iterator 的对象才能使用for of 循环
-  - symbol.for() 可以在全局访问symbol
+  - 提供遍历接口，symbol.iterator 的对象才能使用 for of 循环
+  - symbol.for() 可以在全局访问 symbol
 - falsely 变量
   - !!0 === false
   - !!NaN === false
@@ -349,7 +349,7 @@ JS 有三种类型的执行上下文
 ### 3.3 原型链
 
 - 每个对象拥有一个原型对象，通过 `__proto__` 指针指向上一个原型 ，并从中继承方法和属性，同时原型对象也可能拥有原型，这样一层一层，最终指向 `null`。这种关系被称为原型链 (prototype chain)，通过原型链一个对象会拥有定义在其他对象中的属性和方法。
-- JS常被描述为一种基于原型的语言--每个对象拥有一个原型对象，当试图访问一个对象的属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或者达到原型链的末尾。准确地说，这些属性和方法定义在Object的构造器函数（constructor functions）之上的prototype属性上，而非实例对象本身
+- JS 常被描述为一种基于原型的语言--每个对象拥有一个原型对象，当试图访问一个对象的属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或者达到原型链的末尾。准确地说，这些属性和方法定义在 Object 的构造器函数（constructor functions）之上的 prototype 属性上，而非实例对象本身
 
 ![原型链](./%E5%8E%9F%E5%9E%8B%E9%93%BE-1.png)
 
@@ -1773,7 +1773,7 @@ Array.prototype.flat = function(depth = 1) {
   return depth === Infinity ? res.flat(Infinity) : res.flat(depth - 1)
 }
 
-// 18 axios 
+// 18 axios
 import originAxios from 'axios'
 
 const Service = originAxios.create({
@@ -1842,7 +1842,7 @@ function bubbleSort(arr) {
   return arr
 }
 
-// 选择排序 
+// 选择排序
 function selectionSort(arr) {
   if (!Array.isArray(arr)) {
     return false
@@ -1944,7 +1944,7 @@ function quickSort(arr, low, high) {
 }
 ```
 
-## 13. ES6新特性
+## 13. ES6 新特性
 
 ### ES6
 
@@ -1964,17 +1964,17 @@ function quickSort(arr, low, high) {
 ### ES7
 
 - Array.prototype.includes()
-- 指数操作符（**）
+- 指数操作符（\*\*）
 
 ### ES8
 
 - async/await
 - Object.values()
-  - `Object.values()`是一个与Object.keys()类似的新函数，但返回的是Object自身属性的所有值，不包括继承的值。
+  - `Object.values()`是一个与 Object.keys()类似的新函数，但返回的是 Object 自身属性的所有值，不包括继承的值。
 - Object.entries()
   - `Object.entries()`函数返回一个给定对象自身可枚举属性的键值对的数组。
 - String padding
-  - 在ES8中String新增了两个实例函数`String.prototype.padStart`和`String.prototype.padEnd`，允许将空字符串或其他字符串添加到原始字符串的开头或结尾。
+  - 在 ES8 中 String 新增了两个实例函数`String.prototype.padStart`和`String.prototype.padEnd`，允许将空字符串或其他字符串添加到原始字符串的开头或结尾。
   - `String.padStart(targetLength,[padString])`
     - `targetLength`:当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身。
     - `padString`:(可选)填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断，此参数的缺省值为 " "。
@@ -1990,7 +1990,7 @@ function quickSort(arr, low, high) {
 ### 14.1 什么是跨域
 
 - 同源：指 域名、协议、端口均相同
-- 跨域：是指浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对JavaScript实施的安全限制
+- 跨域：是指浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对 JavaScript 实施的安全限制
 
 - 非同源限制
   - 无法读取非同源网页的 cookie、localStorage、IndexedDB
@@ -1999,21 +1999,25 @@ function quickSort(arr, low, high) {
 
 ### 14.2 解决跨域的方法
 
-- 设置document.domain解决无法读取非同源网页的 Cookie问题
+- 设置 document.domain 解决无法读取非同源网页的 Cookie 问题
 - 跨文档通信 API：window.postMessage()
   - 页面和其打开的新窗口的数据传递
   - 多窗口之间消息传递
-  - 页面与嵌套的iframe消息传递
+  - 页面与嵌套的 iframe 消息传递
   - 上面三个场景的跨域数据传递
 - JSONP
-  - JSONP 是服务器与客户端跨源通信的常用方法。最大特点就是简单适用，兼容性好（兼容低版本IE），缺点是只支持get请求，不支持post请求
+  - JSONP 是服务器与客户端跨源通信的常用方法。最大特点就是简单适用，兼容性好（兼容低版本 IE），缺点是只支持 get 请求，不支持 post 请求
   - 核心思想：网页通过添加一个`<script>`元素，向服务器请求 JSON 数据，服务器收到请求后，将数据放在一个指定名字的回调函数的参数位置传回来。
 - CORS
   - CORS 是跨域资源分享（Cross-Origin Resource Sharing）的缩写。它是 W3C 标准，属于跨源 AJAX 请求的根本解决方法
-    - 普通跨域请求：只需服务器端设置Access-Control-Allow-Origin
-    - 带cookie跨域请求：前后端都需要进行设置
+  - 当使用XMLHttpRequest发送请求时，如果浏览器发现违反了同源策略就会自动加上一个请求头 origin
+  - 后端在接受到请求后确定响应后会在 Response Headers 中加入一个属性 Access-Control-Allow-Origin
+  - 浏览器判断响应中的 Access-Control-Allow-Origin 值是否和当前的地址相同，匹配成功后才继续响应处理，否则报错
+    - 普通跨域请求：只需服务器端设置 Access-Control-Allow-Origin
+    - 带 cookie 跨域请求：前后端都需要进行设置
 - webpack 本地代理
-  - 在webpack.config.js中利用 WebpackDevServer 配置本地代理，
+
+  - 在 webpack.config.js 中利用 WebpackDevServer 配置本地代理，
 
   ```JS
   devServer: {
@@ -2029,3 +2033,4 @@ function quickSort(arr, low, high) {
 - websocket
 - Nginx 反向代理
   - 实现原理类似于 Node 中间件代理，需要你搭建一个中转 nginx 服务器，用于转发请求
+  - 我们只需要配置 nginx，在一个服务器上配置多个前缀来转发 http/https 请求到多个真实的服务器即可。这样，这个服务器上所有 url 都是相同的域 名、协议和端口。因此，对于浏览器来说，这些 url 都是同源的，没有跨域限制。而实际上，这些 url 实际上由物理服务器提供服务。这些服务器内的 javascript 可以跨域调用所有这些服务器上的 url
