@@ -1368,7 +1368,7 @@ Array.prototype.unique = function () {
   return newArray;
 };
 
-//2. indexOf
+// 2. indexOf
 Array.prototype.unique = function () {
   return this.filter((item, index) => {
     return this.indexOf(item) === index;
