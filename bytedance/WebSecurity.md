@@ -144,3 +144,43 @@
       - Access-Control-Request-Headers： 指定CORS请求会额外发送的头信息字段，用逗号隔开
     - OPTIONS 请求次数过多也会损耗性能，所以要尽量减少OPTIONS请求，可以让服务器在请求返回头部添加
       - Acess-Control-Max-Age：Number
+
+  - Nginx 代理
+    - 配置一个代理服务器向服务器请求，再将数据返回给客户端，实质和CORS跨域原理一样，需要配置请求响应头Access-Control-Allow-Origin等字段
+
+    ```js
+    server { 
+      listen 81; server_name www.domain1.com; 
+      location / { 
+        proxy_pass http://xxxx1:8080; // 反向代理 
+        proxy_cookie_domain www.xxxx1.com www.xxxx2.com; // 修改cookie里域名 
+        index index.html index.htm; 
+        // 当用webpack-dev-server等中间件代理接口访问nignx时，此时无浏览器参与，故没有同源限制，下面的跨域配置可不启用 
+        add_header Access-Control-Allow-Origin http://www.xxxx2.com; // 当前端只跨域不带cookie时，可为* 
+        add_header Access-Control-Allow-Credentials true; 
+      } 
+    }
+    ```
+
+  - webpack devServer 代理
+
+  - websocket
+    - websocket是HTML5标准中的一种通信协议，不实行同源政策
+    - 因为websocket请求头信息中有origin字段，表明请求源来自哪个域
+    - postMessage
+      - 页面和信打开的窗口间数据传递
+      - 多窗口之间数据传递
+      - 页面与嵌套的iframe之间数据传递
+  - JSONP
+
+## 前端常规安全策略
+
+- 定期请第三方机构做俺去那行测试
+- 使用第三方开源库做上线前安全测试
+- code review 保证代码质量
+- 默认项目中设置对应的 Header 请求头
+- 队第三方包和库做检测
+
+## cookie 中的httpOnly 属性
+
+- JavaScript Document.cookie API 无法访问带有 HttpOnly 属性的cookie；此类 Cookie 仅作用于服务器。也就是说，对于设置了 HttpOnly 属性为 true 的cookie，无法通过 js 进行访问或其他操作，只是在发送对应域下的请求时，浏览器会自动带上。这样可以有效缓解 XSS 攻击。
