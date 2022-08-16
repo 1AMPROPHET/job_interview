@@ -26,7 +26,7 @@
   - 视图层：应用的展示效果，各类UI组件
   - 业务逻辑层：框架封装的核心，它负责将数据与视图关联起来
 
-- ViewModel 
+- ViewModel
   - 主要职责是
     - 数据变化后的更新视图
     - 视图变化后更新数据
@@ -93,46 +93,45 @@
 
 ### 生命周期有哪些
 
-|生命周期|描述|
-|-----|------|
-|beforeCreate|   组件实例被创建之初|
-|created     | 组件实例已经完全创建|
-|beforeMount | 组件挂载之前|
-|mounted     | 组件挂载到实例上去之后|
-|beforeUpdate| 组件数据发生变化、更新之前|
-|updated| 组件数据更新之后|
-|beforeDestory| 组件实例销毁之前|
-|destroyed| 组件实例销毁之后|
-|activated| keep-alive 缓存的组件激活时|
-|deactivated| keep-alive 缓存的组件停用时调用|
-|errorCaptured | 捕获一个来自孙组件的错误时被调用|
+| 生命周期      | 描述                             |
+| ------------- | -------------------------------- |
+| beforeCreate  | 组件实例被创建之初               |
+| created       | 组件实例已经完全创建             |
+| beforeMount   | 组件挂载之前                     |
+| mounted       | 组件挂载到实例上去之后           |
+| beforeUpdate  | 组件数据发生变化、更新之前       |
+| updated       | 组件数据更新之后                 |
+| beforeDestory | 组件实例销毁之前                 |
+| destroyed     | 组件实例销毁之后                 |
+| activated     | keep-alive 缓存的组件激活时      |
+| deactivated   | keep-alive 缓存的组件停用时调用  |
+| errorCaptured | 捕获一个来自孙组件的错误时被调用 |
 
 ### 具体分析
 
-|生命周期|分析|
-|----|------|
-|beforeCreate -> created| 初始化Vue实例，进行数据观测|
-|created|1. 完成数据观测，属性与方法的运算，watch、event事件回调的配置 2. 可调用methods中的方法，访问和修改data数据触发响应式渲染dom，可通过computed和watch完成数据计算 3. 此时vm.$el 并没有被创建|
-|beforeMount -> mounted|此阶段vm.el完成挂载，vm.$el生成的DOM替换了el选项所对应的DOM|
-|mounted|vm.el已完成DOM的挂载与渲染，此刻打印vm.$el，发现之前的挂载点及内容已被替换成新的DOM|
-|beforeUpdate|1. 更新的数据必须是被渲染在模板上的（el、template、render之一） 2. 此时view层还未更新 3. 若在beforeUpdate中再次修改数据，不会再次触发更新方法|
-|updated|1. 完成view层的更新 2. 若在updated中再次修改数据，会再次触发更新方法（beforeUpdate、updated）|
-|beforeDestroy|实例被销毁前调用，此时实例属性与方法仍可访问|
-|destroyed|1. 完全销毁一个实例。可清理它与其它实例的连接，解绑它的全部指令及事件监听器 2. 并不能清除DOM，仅仅销毁实例|
-
+| 生命周期                | 分析                                                                                                                                                                                      |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| beforeCreate -> created | 初始化Vue实例，进行数据观测                                                                                                                                                               |
+| created                 | 1. 完成数据观测，属性与方法的运算，watch、event事件回调的配置 2. 可调用methods中的方法，访问和修改data数据触发响应式渲染dom，可通过computed和watch完成数据计算 3. 此时vm.$el 并没有被创建 |
+| beforeMount -> mounted  | 此阶段vm.el完成挂载，vm.$el生成的DOM替换了el选项所对应的DOM                                                                                                                               |
+| mounted                 | vm.el已完成DOM的挂载与渲染，此刻打印vm.$el，发现之前的挂载点及内容已被替换成新的DOM                                                                                                       |
+| beforeUpdate            | 1. 更新的数据必须是被渲染在模板上的（el、template、render之一） 2. 此时view层还未更新 3. 若在beforeUpdate中再次修改数据，不会再次触发更新方法                                             |
+| updated                 | 1. 完成view层的更新 2. 若在updated中再次修改数据，会再次触发更新方法（beforeUpdate、updated）                                                                                             |
+| beforeDestroy           | 实例被销毁前调用，此时实例属性与方法仍可访问                                                                                                                                              |
+| destroyed               | 1. 完全销毁一个实例。可清理它与其它实例的连接，解绑它的全部指令及事件监听器 2. 并不能清除DOM，仅仅销毁实例                                                                                |
 
 ### 使用场景分析
 
-|生命周期|描述|
-|----|-----|
-|beforeCreate|执行时组件实例还未创建，通常用于插件开发中执行一些初始化任务|
-|created|组件初始化完毕，各种数据可以使用，常用于异步数据获取|
-|beforeMount|未执行渲染、更新，dom未创建|
-|mounted|初始化结束，dom已创建，可用于获取访问数据和dom元素|
-|beforeUpdate|更新前，可用于获取更新前各种状态|
-|updated|更新后，所有状态已是最新|
-|beforeDestroy|销毁前，可用于一些定时器或订阅的取消|
-|destroyed|组件已销毁，作用同上|
+| 生命周期      | 描述                                                         |
+| ------------- | ------------------------------------------------------------ |
+| beforeCreate  | 执行时组件实例还未创建，通常用于插件开发中执行一些初始化任务 |
+| created       | 组件初始化完毕，各种数据可以使用，常用于异步数据获取         |
+| beforeMount   | 未执行渲染、更新，dom未创建                                  |
+| mounted       | 初始化结束，dom已创建，可用于获取访问数据和dom元素           |
+| beforeUpdate  | 更新前，可用于获取更新前各种状态                             |
+| updated       | 更新后，所有状态已是最新                                     |
+| beforeDestroy | 销毁前，可用于一些定时器或订阅的取消                         |
+| destroyed     | 组件已销毁，作用同上                                         |
 
 ### 数据请求在created和mouted的区别
 
@@ -457,7 +456,7 @@
   - 数组API方法无法监听，增加了set、delete API，并对数组API方法进行了一个重写
   - 需要对每个属性进行遍历监听，如果嵌套对象，需要深层监听，造成性能问题
 
-### proxy
+### 什么是 proxy
 
 - Proxy的监听是针对一个对象的，那么对这个对象的所有操作会进入监听操作，这就完全可以代理所有属性了
 
@@ -471,6 +470,7 @@
   - 代码的可读性随着组件的变大而变差
   - 每一种代码服用的方式，都存在缺点
   - TypeScript支持有限
+
 ### Options API
 
 - Options API，即大家常说的选项API，即以vue为后缀的文件，通过定义methods，computed，watch，data等属性与方法，共同处理页面逻辑
@@ -487,7 +487,7 @@
     - 数据来源不清晰
   - Vue3 中使用 Composition API 编写hook 函数
 
-### 小结
+### 总结
 
 - 在逻辑组织和逻辑服用方面，Composition API 是优于Options API
 - 因为 Composition API几乎是函数，会有更好的类型推断
