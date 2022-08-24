@@ -313,6 +313,7 @@
 
 - createElement 创建 VNode 的过程，每个 VNode 有 children，children 每个元素也是一个VNode，这样就形成了一个虚拟树结构，用于描述真实的DOM树结构
 
+
 ## 15. Vue 项目结构
 
 ### 为什么划分
@@ -494,3 +495,373 @@
 - Composition API 对 tree shaking 友好，代码也更容易压缩
 - Composition API 中见不到this 的使用，减少了this只想不明的情况
 - 如果是小型组件，可以继续使用Options API，也是十分友好地
+
+## 22. Vue3 中的tree shaking
+
+### 什么是 tree shaking
+
+- Tree shaking 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 Dead code elimination
+
+### 如何做 tree shaking
+
+- Tree shaking是基于ES6模板语法（import与exports），主要是借助ES6模块的静态编译思想，在编译时就能确定模块的依赖关系，以及输入和输出的变量
+- 主要做了两件事
+  - 编译阶段利用ES6 Module 判断哪些模块已经加载
+  - 判断哪些模块和变量未被使用或者引用，进而进行删除对应代码
+
+### 作用
+
+- 通过 tree shaking，Vue3带来的好处是
+  - 减小程序体积
+  - 减小程序执行时间
+  - 便于将来对程序架构进行优化
+
+## 23. Vue 中的 SSR
+
+### 什么是SSR
+
+- Server-Side Rendering 我们称其为SSR，意为服务端渲染
+
+- 指由服务侧完成页面的 HTML 结构拼接的页面处理技术，发送到浏览器，然后为其绑定状态与事件，成为完全可交互页面的过程
+
+- Vue中的SSR
+  - Vue SSR 是在一个SPA上进行改良的服务端渲染
+  - 通过Vue SSR 渲染的页面，需要在客户端激活才能实现交互
+  - Vue SSR 将包含两部分：服务端渲染的首屏，包含交互的SPA
+
+### 解决了什么问题
+
+- SSR 主要解决了以下两种问题
+  - seo：搜索引擎优先爬取页面HTML结构，使用SSR时，服务端已经生成了和业务相关练的HTML，有利于seo
+  - 首屏呈现渲染：用户无需等待页面所有js加载完就可以看到页面视图，（压力来到了服务器，所以需要平衡哪些用服务端喧染，哪些用客户端
+  
+### 小结
+
+- 使用SSR不存在单例模式，每次用户请求都会创建一个新的Vue实例
+- 实现SSR需要实现服务端首屏渲染和客户端激活
+- 服务端异步获取数据可以分为首屏异步获取和切换组件获取
+  - 首屏异步获取数据，在服务端预渲染的时候就应该已经完成
+  - 切换组件通过mixin混入，在beforeMount钩子完成数据获取
+
+## 24. Vue 中的 keep alive
+
+- keepalive 是 Vue 内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染，也就是所谓的组件缓存。
+
+### include 和 exclude 指定是否缓存某些组件
+
+- include：值为字符串或正则表达式或数组，组件名称与include 值相同才会被缓存
+- exclude：用法同include，指定哪些组件不被缓存
+
+### keep-alive 生命周期钩子函数执行顺序
+
+- 使用 keep-alive 组件后，组件会自动加上 activated 钩子和 deactivated 钩子
+  - activated：当组件被激活时触发，可以简单理解为进入这个页面的时候触发
+  - deactivated：当组件不被使用的时候触发，可以简单理解为离开这个页面的时候触发
+
+- 初始进入和离开：created、mounted、activated
+- 后续进入和离开：activated、deactivated
+
+## 25. Vue 中 computed 和 watch
+
+### computed 计算属性
+
+- 计算属性基于 data 中声明过或者父组件传递的 props 中的数据通过计算得到的一个新值，这个新值只会根据已知值的变化而变化，简言之：这个属性依赖其他属性，由其他属性计算而来的
+
+- computed 内定义的 function 只执行一次，仅当初始化显示或者相关的 data、props 等属性数据发生变化的时候调用；
+而 computed 属性值默认会缓存计算结果，计算属性是基于它们的响应式依赖进行缓存
+- 只有当 computed 属性被使用后，才会执行 computed 的代码，在重复的调用中，只要依赖数据不变，直接取缓存中的计算结果。只有依赖型数据发生改变，computed 才会重新计算。
+
+### watch 监听属性
+
+- 通过 vm 对象的 $watch() 或 watch 配置来监听 Vue 实例上的属性变化，或某些特定数据的变化，然后执行某些具体的业务逻辑操作。当属性变化时，回调函数自动调用，在函数内部进行计算。其可以监听的数据来源：data，props，computed 内的数据。
+
+- 监听函数有两个参数，第一个参数是最新的值，第二个参数是输入之前的值，顺序一定是新值，旧值，如果只写一个参数，那就是最新属性值。
+
+- 在使用时选择 watch 还是 computed，还有一个参考点就是官网说的：当需要在数据变化时执行异步或开销较大的操作时，watch方式是最有用的。所以 watch 一定是支持异步的。
+
+### 总结
+
+- watch和computed都是以Vue的依赖追踪机制为基础的，当某一个依赖型数据（依赖型数据：简单理解即放在 data 等对象下的实例数据）发生变化的时候，所有依赖这个数据的相关数据会自动发生变化，即自动调用相关的函数，来实现数据的变动。
+
+- 当依赖的值变化时，在watch中，是可以做一些复杂的操作的，而computed中的依赖，仅仅是一个值依赖于另一个值，是值上的依赖。
+- 应用场景
+  - computed：用于处理复杂的逻辑运算；一个数据受一个或多个数据影响；用来处理watch和methods无法处理的，或处理起来不方便的情况。例如处理模板中的复杂表达式、购物车里面的商品数量和总金额之间的变化关系等。
+  - watch：用来处理当一个属性发生变化时，需要执行某些具体的业务逻辑操作，或要在数据变化时执行异步或开销较大的操作；一个数据改变影响多个数据。例如用来监控路由、inpurt 输入框值的特殊处理等。
+
+- 区别
+  - computed
+    - 初始化显示或者相关的 data、props 等属性数据发生变化的时候调用；
+    - 计算属性不在 data 中，它是基于data 或 props 中的数据通过计算得到的一个新值，这个新值根据已知值的变化而变化；
+    - 在 computed 属性对象中定义计算属性的方法，和取data对象里的数据属性一样，以属性访问的形式调用；
+    - 如果 computed 属性值是函数，那么默认会走 get 方法，必须要有一个返回值，函数的返回值就是属性的属性值；
+    - computed 属性值默认会缓存计算结果，在重复的调用中，只要依赖数据不变，直接取缓存中的计算结果，只有依赖型数据发生改变，computed 才会重新计算；
+    - 在computed中的，属性都有一个 get 和一个 set 方法，当数据变化时，调用 set 方法。
+  - watch
+    - 主要用来监听某些特定数据的变化，从而进行某些具体的业务逻辑操作，可以看作是 computed 和 methods 的结合体；
+    - 可以监听的数据来源：data，props，computed内的数据；
+    - watch 支持异步
+    - 不支持缓存，监听数据改变，直接会触发相应的操作
+    - 监听函数有两个参数，第一个参数是最新的值，第二个参数是输入之前的值，顺序一定是新值、旧值
+
+## 26. react 和 vue 有什么区别
+
+### 区别
+
+- react 的思路是 HTML in JS，可以说是 all in JS，通过JS 来生成HTML，所以设计了JSX 语法
+
+- Vue 是把HTML， CSS， JS 组合到一起，用各自的处理方式
+
+- react 整体式函数式的思想，在react 中是单向数据流，推崇结合 immutable 来实现数据不可变
+- Vue 的思想是响应式，也就是基于数据可变，通过对每一个属性建立 Watcher 来监听，当属性变化时，响应式对应更新虚拟DOM
+
+- 所以，React 的性能优化需要手动去做
+
+### 优势
+
+- React
+  - 灵活性和响应性：它提供最大的灵活性和响应能力
+  - 丰富的JS 库：来自世界各地的贡献者正在努力添加更多功能
+  - 可扩展性：由于其灵活的架构和可扩展性，React 已被证明对大型应用程序更好
+  - 不断发展：React 得到了facebook 专业开发人员的支持，不断改进
+  - Web 或者移动平台：React 提供 React Native 平台
+
+- Vue
+  - 易于使用：包含基础HTML模板，可以更轻松的使用
+  - 更流畅的集成：无论是单页面应用程序还是复杂的Web 既然面，Vue 都可以更平滑的集成更小的部件，而不会对整个系统产生任何影响
+  - 更好的性能，更小的尺寸：占用更小的空间
+  - 无障碍地迁移
+
+## 27. Vue 渲染过程
+
+### 挂载组件（$mount）
+
+- Vue 是一个构造函数，通过 new 关键字进行实例化
+- 在实例化时，会调用 _init 进行初始化
+- _init内会调用 $mount 来挂载组件，而 $mount 方法实际调用的是 mountComponent
+- mountComponent 除了调用一些生命周期的钩子函数外，最主要是 updateComponent，它就是负责渲染视图的核心方法
+- vm._render 创建并返回 VNode，vm._update 接受 VNode 将其转为真实节点。
+- updateComponent 会被传入 渲染Watcher，每当数据变化触发 Watcher 更新就会执行该函数，重新渲染视图。updateComponent 在传入 渲染Watcher 后会被执行一次进行初始化页面渲染。
+
+### 总结
+
+- 初始化调用 $mount 挂载组件
+- _render 开始构建VNode，核心方法为 createElement，一般会创建普通的 VNode，遇到组件就创建组件类型的VNode，否则就是未知标签的 VNode，构建完成传递给 _update
+- patch 阶段根据 VNode 创建真实节点树，核心方法为 createElm，首先遇到组件类型的 VNode 创建真实节点树，内部会执行 $mount，再走一遍相同的流程。普通节点类型则创建一个真实节点，如果它有子节点开始递归调用 createElm，使用 insert 插入子节点，直到没有子节点就填充内容节点。最后递归完成后，同样也是使用 insert 将整个节点树插入到页面中，再将旧的根节点移除。
+
+## 28. Vue 路由
+
+### hash 模式
+
+- hash 模式是一种把前端路由的路径用井号 # 拼接在真实 URL 后面的模式。当井号 # 后面的路径发生变化时，浏览器并不会重新发起请求，而是会触发 hashchange 事件。
+- 优点：浏览器兼容性好，只需要前端支持
+- 缺点：不好看
+
+### history
+
+- history API 是 H5 提供的新特性，允许开发者直接更改前端路由，即更新浏览器 URL 地址而不重新发起请求
+- 优点：路径规整，没有 #
+- 缺点：兼容性不如 hash，且需要服务端支持，否则页面会404
+
+## 29. Vue2 于 Vue3 响应式区别
+
+### 如何拦截 GET 和 SET 操作
+
+- Vue2 中，使用 ES5 的 Object.defineProperty() 函数
+- Vue3 中，使用 ES6 的 Proxy 和 Reflect API 实现
+
+### 如何使用 Reflect
+
+- 三种方法读取一个对象的属性：
+  - 使用 `.` 操作符，`leo.name`
+  - 使用`[]`：`leo['name']`
+  - 使用 `Reflect API`：`Reflect.get(leo, 'name')`
+
+### 如何使用 Proxy
+
+- Proxy 对象用于创建一个对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）。
+
+```JS
+const p = new Proxy(target, handler)
+```
+
+- target：要使用proxy包装的目标对象（可以是任何类型的对象，包括原生数组，函数，甚至另一个代理）
+- handler：一个通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的行为
+
+## 30. Vue 中的 $router 和 $route
+
+### this.$router
+
+- 是 router 实例
+- 通过 `this.$router` 访问路由器，相当于获取了整个路由文件，在 `$router.option.routes` 中，或查看到当前项目的整个路由结构具有实例方法
+
+```JS
+router.beforeEach((to, from, next) => {
+  // 必须使用next
+})
+
+router.beforeResolve((to, from, next) => {
+  // 必须使用next
+})
+
+router.afterEach((to, from) => {
+  
+})
+
+// 动态导航到新的路由
+router.push()
+router.replace()
+router.go()
+router.back()
+router.forward()
+```
+
+### this.$route
+
+- 当前激活的路由信息对象。这个属性是只读的，里面的属性是 `immutable不可变` 的，不过可以 watch 它
+- 通过 `$route` 访问的是当前路由，获取和当前路由有关的信息
+
+```JS
+fullPath: '' // 当前路由完整路径，包含查询参数和hash的完整路径
+hash: '' // 当前路由的hash值
+matched: [] // 包含当前路由的所有嵌套路径片段的路由记录
+meta: {} // 路由文件中自赋值的meta信息
+name: '' // 路由名称
+params: {} // 一个key/value 对象，包含了动态片段和全匹配片段就是一个空对象
+path: '' // 字符串，对应当前的路由路径
+query: {} // 一个key/value对象，表示 URL 查询参数。跟随在路径后用 ？ 带的参数
+```
+
+## 31. vite 的原理
+
+### 共存的模块化标准
+
+- CommonJS：现在主要用于Node.js 
+- AMD：require.js 依赖前置，市场存量不建议使用
+- CMD：sea.js 就近执行，市场存量不建议使用
+- ES Module：ES 语言规范，标准，趋势，未来
+
+### 构建工具
+
+- 近些年前端工程化发展迅速，各种构建工具层出不穷，目前`Webpack`仍然占据统治地位，npm 每周下载量达到两千多万次。
+
+### 当前工程化痛点
+
+- 现在常用的构建工具如`Webpack`，主要是通过抓取-编译-构建整个应用的代码（也就是常说的打包过程），生成一份编译、优化后能良好兼容各个浏览器的的生产环境代码。在开发环境流程也基本相同，需要先将整个应用构建打包后，再把打包后的代码交给`dev server`（开发服务器）。
+
+- Webpack等构建工具的诞生给前端开发带来了极大的便利，但随着前端业务的复杂化，js代码量呈指数增长，打包构建时间越来越久，`dev server`（开发服务器）性能遇到瓶颈：
+  - 缓慢的服务启动：大型项目中的 `dev server` 启动时间达到几十秒甚至几分钟
+  - 缓慢的HMR热更新：即使采用了HMR 模式，热更新速度也会随着应用规模的增长而显著下降，已经达到性能瓶颈，没有优化的空间
+
+### 什么是 Vite
+
+- 基于esbuild与Rollup，依靠浏览器自身ESM编译功能， 实现极致开发体验的新一代构建工具！
+
+- 概念
+  - 依赖：指开发不会变动的部分（npm 包，UI组件库），`esbuild` 进行预构建
+  - 源码：浏览器不能直接执行的非js代码，vite只在浏览器请求相关源码时进行转换，以提供ESM源码。
+
+- 开发环境
+  - 利用浏览器原生的 `ES Module` 编译能力，省略费事的编译环节，直接给浏览器开发环境源码，`dev server` 只提供轻量服务
+  - 浏览器执行ESM的import时，会向`dev server`发起该模块的ajax请求，服务器对源码做简单处理后返回给浏览器。
+  - Vite中HMR是在原生 ESM 上执行的。当编辑一个文件时，Vite 只需要精确地使已编辑的模块失活，使得无论应用大小如何，HMR 始终能保持快速更新。
+  - 使用`esbuild`处理项目依赖，`esbuild`使用`go`编写，比一般`node.js`编写的编译器快几个数量级。
+
+-  生产环境
+   -  集成 `Rollup` 打包生产环境代码，依赖其成熟稳定的生态与更简洁的插件机制
+
+- 处理流程对比
+  - Webpack 通过先将整个应用打包，再将打包后的代码提供给 devServer ，开发者才能开始开发
+  - Vite 直接将源码交给浏览器，实现 devServer 秒开，浏览器显示相关页面需要相关模块时，再向 devServer 发起请求，服务器简单处理后，将该模块返回给浏览器，实现真正意义的按需加载
+
+### 实现原理
+
+- ESbuild 编译
+
+  - ESbuild 使用go编写，cpu 密集下更具性能优势，编译速度更快。
+- 依赖预构建
+  - 模块化兼容：现仍共存多种模块化标准代码，Vite在预构建阶段将依赖中各种其他模块化规范(CommonJS、UMD)转换 成ESM，以提供给浏览器。
+  - 性能优化：npm包中大量的ESM代码，大量的import请求，会造成网络拥塞。Vite使用esbuild，将有大量内部模块的ESM关系转换成单个模块，以减少 import模块请求次数。
+
+- 按需加载：服务器只在接受到import请求的时候，才会编译对应的文件，将ESM源码返回给浏览器，实现真正的按需加载。
+- 缓存
+  - HTTP缓存：充分利用http缓存做优化，依赖（不会变动的代码）部分用max-age,immutable 强缓存，源码部分用304协商缓存，提升页面打开速度。
+  - 文件系统缓存：Vite在预构建阶段，将构建后的依赖缓存到node_modules/.vite ，相关配置更改时，或手动控制时才会重新构建，以提升预构建速度。
+
+- 重写模块路径：浏览器import只能引入相对/绝对路径，而开发代码经常使用npm包名直接引入node_module中的模块，需要做路径转换后交给浏览器。
+  - es-module-lexer 扫描 import 语法
+  - magic-string 重写模块的引入路径
+
+### 优势
+
+- 快
+- 高集成度
+- 基于ESM急速热更新，无需打包编译
+- 基于esbuild的依赖预处理，比 Webpack 等node编写的编译器快几个数量级
+- 兼容rollup庞大的插件机制
+- 不于Vue绑定，支持react等其他框架
+- 内置SSR支持
+- 天然支持TS
+
+### 不足
+
+- Vue 仍为第一支持，对react 支持不如 Vue
+- 已推出2.0版，但目前市场上实践较少
+- 生产环境集成Rollup打包，与开发环境最终执行的代码不一致
+
+## 32. vue3 中怎么设置全局变量
+
+### 使用 config.globalProperties
+
+- Vue2 使用 Vue.prototype.$xxx = xxx 来挂载，然后通过 this.$xxx 来获取挂载到全局的变量或方法
+- Vue3 中，等同于 config.globalProperties。
+
+```js
+// Vue2
+Vue.prototype.$http = () => {}
+
+// Vue3
+const app = createApp({})
+app.config.globalProperties.$http = () => {}
+```
+### Provide / Inject
+
+- vue3新的 provide/inject 功能可以穿透多层组件，实现数据从父组件传递到子组件。可以将全局变量放在根组件的 provide 中，这样所有的组件都能使用到这个变量。如果需要变量是响应式的，就需要在 provide 的时候使用 ref 或者 reactive 包装变量。
+
+## 33. Vue 中的 CSS Scope
+
+- 我们知道 `<template></template>` 这个是模板，不是真实的 HTML，浏览器是不认识模板的，所以我们需要把它编译成浏览器认识的原生的 HTML
+- 主要流程是
+  - 提取出模板中的原生 HTML 和非原生 HTML，比如绑定的属性、事件、指令等等
+  - 经过一些处理生成 render 函数
+  - render 函数再将模板内容生成对应的 vnode
+  - 再经过 patch 过程( Diff )得到要渲染到视图中的 vnode
+  - 最后根据 vnode 创建真实的 DOM 节点，也就是原生 HTML 插入到视图中，完成渲染
+
+## 34. Vue 中的 diff 算法
+
+### 什么是 diff 算法
+
+- diff 算法是一种通过同层的树节点进行比较的高效算法，其有两个特点：
+  - 比较只会在同层级进行, 不会跨层级比较
+  - 在diff比较的过程中，循环从两边向中间比较
+- diff 算法的在很多场景下都有应用，在 vue 中，作用于虚拟 dom 渲染成真实 dom 的新旧 VNode 节点比较
+
+### 比较方式
+
+- diff 整体策略为：深度优先，同层比较
+  - 比较只会在同层级进行，不会跨层级比较
+  - 比较的过程中，循环从两边向中间靠拢
+
+### 小结
+
+- 当数据发生改变时，订阅者 watcher 就会调用 patch 给真实的 DOM 打补丁
+- 通过 isSameVnode 进行判断，相同则调用 patchVnode 方法
+- patchVnode 做了以下操作
+  - 找到对应的真实dom，称为el
+  - 如果都有都有文本节点且不相等，将el文本节点设置为Vnode的文本节点
+  - 如果oldVnode有子节点而VNode没有，则删除el子节点
+  - 如果oldVnode没有子节点而VNode有，则将VNode的子节点真实化后添加到el
+  - 如果两者都有子节点，则执行updateChildren函数比较子节点
+- updateChildren主要做了以下操作
+  - 设置新旧VNode的头尾指针
+  - 新旧头尾指针进行比较，循环向中间靠拢，根据情况调用patchVnode进行patch重复流程、调用createElem创建一个新节点，从哈希表寻找 key一致的VNode 节点再分情况操作
