@@ -124,7 +124,7 @@
       - 请求方法是：HEAD、GET、POST，三者之一
       - 请求头信息不超过以下几个字段：
         - Accept
-        - 0Accept-Language
+        - Accept-Language
         - Content-Language
         - Last-Event-Id
         - Content-Type：值为三者之一application/x-www/form/urlencoded、multipart/form-data、text/plain

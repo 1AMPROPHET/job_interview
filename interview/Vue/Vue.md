@@ -75,8 +75,8 @@
 - new Vue 的时候会调用_init方法
 
   - 定义 $set $get $delete $watch 等方法
-  - 定义 $on、$off、$emit、$off 等事件
-  - 定义 _update、$forceUpdate、$destroy生命周期
+  - 定义 $on $off $emit $off 等事件
+  - 定义 _update $forceUpdate $destroy生命周期
 
 - 调用 $mount 进行页面的挂载
 
@@ -169,7 +169,7 @@
 
 ### 为什么data 属性是一个函数
 
-- 根实例对象data可以是对象也可以是函数（根实例是单例），不会产生数据污染的情况
+- 根实例对象data可以是对象也可以是函数（根实例是单例, 单例：保证一个类仅有一个实例，并提供一个访问它的全局访问点），不会产生数据污染的情况
 - 组件实例data必须为函数，目的是为了防止多个组件实例对象之间共用一个data，产生数据污染。采用函数的形式，initData时会将其作为工厂函数都会返回全新data对象
 
 ### Vue 添加新属性页面不刷新的解决
@@ -177,7 +177,7 @@
 - Vue.set()
   - 使用了defineReactive方法，实现新增属性的响应式，关于defineReactive 方法，内部还是通过 defineProperty实现属性的拦截
 - Object.assign()
-  - 直接使用添加到对象的新属性并不会触发更新，应创建一个新的对象，合并元对象和混入对象的属性
+  - 直接使用添加到对象的新属性并不会触发更新，应创建一个新的对象，合并原对象和混入对象的属性
 - $forceUpdate
   - 强制刷新，不建议使用
 - Vue3 是通过proxy实现数据响应式的，直接动态添加新的属性仍可以实现响应式
@@ -219,7 +219,7 @@
 ### 原理
 
 - 将回调函数放到callbacks等待执行
-- 将执行函数梵高微任务或宏任务中
+- 将执行函数放到微任务或宏任务中
 - 事件循环到了微任务或者宏任务，执行函数依次执行callback是中的回调
 
 ## 10. mixin
@@ -431,7 +431,7 @@
 
 ### 源码体积
 
-- 相比Vue2，Vue3整体体积变小了，除了移出一些不常用的API，再重要的是Tree shanking，任何一个函数，如ref、reavtived、computed等，仅仅在用到的时候才打包，没用到的模块都被摇掉，打包的整体体积变小
+- 相比Vue2，Vue3整体体积变小了，除了移除一些不常用的API，再重要的是Tree shanking，任何一个函数，如ref、reavtived、computed等，仅仅在用到的时候才打包，没用到的模块都被摇掉，打包的整体体积变小
 
 ### 响应式系统
 
@@ -493,7 +493,7 @@
 - 在逻辑组织和逻辑服用方面，Composition API 是优于Options API
 - 因为 Composition API几乎是函数，会有更好的类型推断
 - Composition API 对 tree shaking 友好，代码也更容易压缩
-- Composition API 中见不到this 的使用，减少了this只想不明的情况
+- Composition API 中见不到this 的使用，减少了this指向不明的情况
 - 如果是小型组件，可以继续使用Options API，也是十分友好地
 
 ## 22. Vue3 中的tree shaking
@@ -755,6 +755,11 @@ query: {} // 一个key/value对象，表示 URL 查询参数。跟随在路径�
 ### 什么是 Vite
 
 - 基于esbuild与Rollup，依靠浏览器自身ESM编译功能， 实现极致开发体验的新一代构建工具！
+  - esbuild：是一个类似webpack构建工具。它的构建速度是 webpack 的几十倍。
+    - js 是单线程串行，esbuild 时新开一个进程，然后多线程并行，充分发挥多核优势
+    - go 是纯机器码，肯定比JIT快
+    - 不使用AST（抽象语法树），优化了构建流程
+  - rollup：`Rollup` 是一个 JavaScript 模块打包器，可以将小块代码编译成大块复杂的代码。Rollup 对代码模块使用新的标准化格式，这些标准都包含在 JavaScript 的 ES6 版本中，而不是以前的特殊解决方案，如 CommonJS 和 AMD。除了使用 ES6 模块之外，Rollup 还静态分析代码中的 import，并将排除任何未实际使用的代码。这允许您架构于现有工具和模块之上，而不会增加额外的依赖或使项目的大小膨胀，也就是实现了 `tree shaking`。
 
 - 概念
   - 依赖：指开发不会变动的部分（npm 包，UI组件库），`esbuild` 进行预构建
