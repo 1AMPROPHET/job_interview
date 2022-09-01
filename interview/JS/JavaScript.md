@@ -277,6 +277,7 @@ JS 有三种类型的执行上下文
 #### 2.7.1 什么是闭包
 
 - 闭包就是同时含有对函数对象以及作用域对象引用的对象,实际上所有 JavaScript 对象都是闭包。闭包就是能够读取其他函数内部变量的函数, 闭包允许函数访问并操作函数外部的变量
+- 从技术的角度讲，所有的JavaScript函数都是闭包：它们都是对象，它们都关联到作用域链。
 
 - from MDN：一个函数和对其周围状态（lexical environment，词法环境）的引用捆绑在一起（或者说函数被引用包围），这样的组合就是闭包（closure）。也就是说，闭包让你可以在一个内层函数中访问到其外层函数的作用域。在 JavaScript 中，每当创建一个函数，闭包就会在函数创建的同时被创建出来
 
@@ -355,6 +356,113 @@ JS 有三种类型的执行上下文
 
 ### 3.4 创建对象的多种方法以及优缺点
 
+- new + Object 创建对象
+
+```js
+var person = new Object()
+person.name = 'lisa'
+person.age = 23
+person.family = ['lida', 'lily']
+person.say = function () {
+  alert(this.name)
+}
+```
+
+- 字面创建对象
+
+```js
+var person = {
+  name: 'lisa',
+  age: 23,
+  family: ['lida', 'lily'],
+  say: function () {
+    alert(this.name)
+  }
+}
+```
+
+- 以上两种方法在使用同一接口创建多个对象时，会产生大量重复代码，为了解决此问题，工厂模式。工厂模式解决了重复实例化多个对象的问题，但没有解决对象识别的问题，因为全部都是Object
+
+```js
+function createPerson(name, age, family) {
+  var o = new Object()
+  o.name = name
+  o.age = age
+  o.family = family
+  o.say = function(){
+      alert(this.name)
+  }
+  return o
+}
+```
+
+- 构造函数模式，对比工厂模式有以下不同之处
+
+  - 没有显示地创建对象
+  - 直接将属性赋给了this对象
+  - 没有return
+
+- 以此方法嗲用构造函数步骤
+  - 创建一个新对象
+  - 将构造函数的作用域赋给新对象（将this指向这个对象）
+  - 执行构造函数代码（为新对象添加属性）
+  - 返回新对象
+- 构造函数也有缺陷，每个实例都包含不同的Function实例
+
+
+```js
+function Person(name, age, family) {
+  this.name = name
+  this.age = age
+  this.family = family
+  this.say = function () {
+    alert(this.name)
+  }
+}
+var person1 = new Person("lisi",21,["lida","lier","wangwu"])
+```
+
+- 原型模式
+
+  - 原型模式的好处食宿由对象实例共享它的属性和方法（共有属性），也可以设置自己的私有属性，可以覆盖原型对象上的同名属性
+
+```js
+function Person() {}
+Person.prototype.name = "lisi"
+Person.prototype.age = 21
+Person.prototype.family = ["lida","lier","wangwu"]
+Person.prototype.say = function(){
+    alert(this.name)
+}
+
+var person1 = new Person()
+ar person2 = new Person();       //创建实例person2
+person2.name = "wangwu"
+person2.family = ["lida","lier","lisi"]
+```
+
+- 混合模式（构造函数模式 + 原型模式），构造函数模式用于定义实例属性，原型模式用于定义和共享的属性
+
+```js
+function Person(name,age,family){
+    this.name = name;
+    this.age = age;
+    this.family = family;
+}
+
+Person.prototype = {
+    constructor: Person,  //每个函数都有prototype属性，指向该函数原型对象，原型对象都有constructor属性，这是一个指向prototype属性所在函数的指针
+    say: function(){
+        alert(this.name);
+    }
+}
+
+var person1 = new Person("lisi",21,["lida","lier","wangwu"]);
+console.log(person1);
+var person2 = new Person("wangwu",21,["lida","lier","lisi"]);
+console.log(person2);
+```
+
 ### 3.5 使用构造函数创建对象的过程
 
 - 使用 new 操作符调用函数
@@ -369,7 +477,7 @@ JS 有三种类型的执行上下文
 
 ```js
 // 第一种：原型链继承
-// 弊端：原型链继承，当原型中存在引用类型值时，示例可以修改其值
+// 弊端：原型链继承，当原型中存在引用类型值时，实例可以修改其值
 function A() {}
 A.prototype.getName = function () {};
 function B() {}
@@ -1151,6 +1259,14 @@ module.exports = Promise;
 
 - 调用系统渲染页面
 
+#### 9.1.3 css js DOM 阻塞问题
+
+- css 文件是并行下载的，CSS 并不会阻塞DOM树的解析，但是会阻塞渲染树
+- CSS 的下载不会阻塞后面的JS 的下载，但是JS下载完后，被阻塞执行，这是由于JS可能会获取页面元素改变样式，所以浏览器会按照顺序，等待上面的CSS 加载解析完成之后，再执行下面的JS
+- js 在执行的过程中可能会操作DOM，发生回流和重绘，所以GUI渲染线程和JS引擎线程是互斥的
+  - 在解析HTML过程中，如果遇到 script 标签，渲染线程会暂停渲染过程，将控制权交给 JS 引擎。内联的js代码会直接执行，如果是js外部文件，则要下载该js文件，下载完成之后再执行。等 JS 引擎运行完毕，浏览器又会把控制权还给渲染线程，继续 DOM 的解析。因此，js会阻塞DOM树的构建。
+
+
 ## 9.2 浏览器地址栏里输入 URL 后的全过程
 
 - 什么是 URL
@@ -1669,7 +1785,7 @@ function asyncLoadImg(url) {
 
 // 12. ajax
 function ajax(options) {
-  const {url, method, async, data, timeout}
+  const {url, method, async, data, timeout} = options
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     xhr.open(method.oLocaleLowerCase() || 'get', url, async)
@@ -1770,7 +1886,7 @@ function bindEvent(elem, type, selector, fn) {
 // 17. flat
 Array.prototype.flat = function(depth = 1) {
   if (typeof this !== 'array') {
-    throw new Error('not a array')
+    throw new Error('not an array')
   }
   if (depth < 1 || !this.some(item => item instanceof Array)) {
     return this
