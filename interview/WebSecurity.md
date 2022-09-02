@@ -54,10 +54,21 @@
   - a.com 以受害者的名义执行了 act=xx
   - 攻击完成，攻击者在受害者不知情的情况下，冒充受害者，让 a.com 执行了自己定义的操作
 
+- 防护策略
+  - CSRF两个特点
+    - CSRF 通常发生在第三方域名
+    - CSRF 攻击者不能获取到Cookie 等信息，只是使用
+  - 针对这两点制定策略
+    - 阻止不明外域访问
+      - 同源检测
+      - Samesite Cookie
+    - 提交是要求附加本域才能获取的信息
+      - CSRF Token
+      - 双重 Cookie 验证
+
 ## SQL 注入
 
-- 就是通过把 SQL 命令插入到 Web 表单递交或输入域名或页面请求的查询字符串，最终达到欺骗数据库服务器执行恶意的 SQL 命令,从而达到和服务器
-  进行直接的交互
+- 就是通过把 SQL 命令插入到 Web 表单递交或输入域名或页面请求的查询字符串，最终达到欺骗数据库服务器执行恶意的 SQL 命令,从而达到和服务器进行直接的交互
 
 - 找出 SQL 漏洞的注入点-
 - 判断数据库的类型以及版本
@@ -131,13 +142,16 @@
 
       - 需要这些条件是为了兼容表单，因为历史上表单一直可以跨域。浏览器直接发出CORS请求，具体来说就是在头信息中增加Origin字段，表示请求来源来自哪个域(协议+域名+端口)，服务器根据这个值决定是否同意请求。如果同意，返回的响应会多出以下响应头信息
         - Access-Control-Allow-Origin: `http://juejin.com` // 和 Orign 一致  这个字段是必须的
+
+          - Access-Control-Allow-Origin：* 表明，该资源可以被任意外域访问，当响应的是附带身份凭证的请求时，服务端必须明确 Access-Control-Allow-Origin 的值，而不能使用通配符。
+          - 如果服务端指定了具体域名而非 * ，那么响应首部的 Vary 字段值必须包含 Origin。这将告诉客户端：服务器对不同的源站返回不同的内容。
         - Access-Control-Allow-Credentials: true // 表示是否允许发送 Cookie  这个字段是可选的
         - Access-Control-Expose-Headers: FooBar // 指定返回其他字段的值   这个字段是可选的
         - Content-Type: text/html; charset=utf-8 // 表示文档类型
       - 在简单请求中服务器至少需要设置：Access-Control-Allow-Origin 字段
 
     - `非简单请求`，比如put 或 delete 请求，或 Content-Type 为 application/json，就是非简单请求
-    - 非简单 CORS 请求，正式请求前会发一次 OPTIONS 类型的查询请求，称为预检请求，询问服务器是否支持网页所在域名的请求，以及可以使用哪些头信息字段。只有收到肯定的答复，才会发起正式XMLHttpRequest请求，否则报错
+    - 非简单 CORS 请求，正式请求前会发一次 `OPTIONS` 类型的查询请求，称为`预检请求`，询问服务器是否支持网页所在域名的请求，以及可以使用哪些头信息字段。只有收到肯定的答复，才会发起正式XMLHttpRequest请求，否则报错
     - 预检请求的方法是OPTIONS，它的头信息中有几个字段
       - Origin: 表示请求来自哪个域，这个字段是必须的
       - Access-Control-Request-Method：列出CORS请求会用到哪些HTTP方法，这个字段是必须的
@@ -148,7 +162,7 @@
   - Nginx 代理
     - 配置一个代理服务器向服务器请求，再将数据返回给客户端，实质和CORS跨域原理一样，需要配置请求响应头Access-Control-Allow-Origin等字段
 
-    ```js
+    ```JSON
     server { 
       listen 81; server_name www.domain1.com; 
       location / { 
@@ -167,7 +181,7 @@
   - websocket
     - websocket是HTML5标准中的一种通信协议，不实行同源政策
     - 因为websocket请求头信息中有origin字段，表明请求源来自哪个域
-    - postMessage
+  - postMessage
       - 页面和信打开的窗口间数据传递
       - 多窗口之间数据传递
       - 页面与嵌套的iframe之间数据传递
@@ -175,7 +189,7 @@
 
 ## 前端常规安全策略
 
-- 定期请第三方机构做俺去那行测试
+- 定期请第三方机构做安全测试
 - 使用第三方开源库做上线前安全测试
 - code review 保证代码质量
 - 默认项目中设置对应的 Header 请求头
