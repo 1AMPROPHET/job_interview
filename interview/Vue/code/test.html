@@ -5,45 +5,61 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    body {
+      position: relative;
+      height: 100vh;
+    }
+    .box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgb(34, 34, 34);
+    }
+  </style>
 </head>
 <body>
+  <div class="box" style="border: 1px solid #ccc; width: 100px; height: 100px;"></div>
   <script src="./Vue3-响应式原理.js"></script>
   <script>
-    const Err = async () => {
-      throw new Error(0)
-    }
-    const obj = {
-      async A() {
-        try {
-          await Err()
-        } catch {
-          console.log('A');
-        }
-      },
-      async B() {
-        try {
-          Err()
-        } catch {
-          console.log('B');
-        }
-      },
-      async C() {
-        try {
-          return Err()
-        } catch {
-          console.log('C');
-        }
-      },
-    };
-    (async () => {
-      for (const key in obj) {
-        try {
-          await obj[key]()
-        } catch {
-          console.log('D');
-        }
-      }
-    })()
+    // const Err = async () => {
+    //   throw new Error(0)
+    // }
+    // const obj = {
+    //   async A() {
+    //     try {
+    //       await Err()
+    //     } catch {
+    //       console.log('A');
+    //     }
+    //   },
+    //   async B() {
+    //     try {
+    //       Err()
+    //     } catch {
+    //       console.log('B');
+    //     }
+    //   },
+    //   async C() {
+    //     try {
+    //       return Err()
+    //     } catch {
+    //       console.log('C');
+    //     }
+    //   },
+    // };
+    // (async () => {
+    //   for (const key in obj) {
+    //     try {
+    //       await obj[key]()
+    //     } catch {
+    //       console.log('D');
+    //     }
+    //   }
+    // })();
+    Promise.resolve(1).then(console.log).catch(console.log).then(console.log)
+    Promise.resolve(1).then(2).then(Promise.resolve(3)).then(console.log)
   </script>
 </body>
 </html>

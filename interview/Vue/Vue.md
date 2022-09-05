@@ -98,34 +98,34 @@
 
 - Vue中实例从创建到销毁的过程就是生命周期
 
-### 生命周期有哪些
+### Vue 2 生命周期有哪些
 
 | 生命周期      | 描述                             |
-| ------------- | -------------------------------- |
-| beforeCreate  | 组件实例被创建之初               |
-| created       | 组件实例已经完全创建             |
-| beforeMount   | 组件挂载之前                     |
-| mounted       | 组件挂载到实例上去之后           |
-| beforeUpdate  | 组件数据发生变化、更新之前       |
-| updated       | 组件数据更新之后                 |
-| beforeDestory | 组件实例销毁之前                 |
-| destroyed     | 组件实例销毁之后                 |
+| ------------- | ------------------------------ |
+| beforeCreate(创建前)  | 实例初始化之后，数据观测和事件配置之前被调用，此时组建的选项对象还未创建，el和data并未初始化，无法访问methods、data、computed等方法和数据 |
+| created (创建后) | 实例已经创建完成之后被调用，在这一步，实例已完成以下配置：数据观测、属性和方法的运算，watch/event事件回调，完成了data 数据的初始化，el没有。 然而，挂载阶段还没有开始, $el属性目前不可见，这是一个常用的生命周期，因为你可以调用methods中的方法，改变data中的数据，并且修改可以通过vue的响应式绑定体现在页面上，获取computed中的计算属性等|
+| beforeMount   | 挂载开始之前被调用，相关的render函数首次被调用（虚拟DOM），实例已完成以下的配置： 编译模板，把data里面的数据和模板生成html，完成了el和data 初始化，注意此时还没有挂载html到页面上。 |
+| mounted       | 挂载完成，即将模板中的HTML渲染到HTML页面中 |
+| beforeUpdate(更新前)  | 组件数据发生变化、更新之前，发生在虚拟DOM重新渲染和打补丁之前，可以在该钩子中进一步更改状态，不会触发重渲染过程 |
+| updated(更新后)  | 组件数据更新之后，由于数据更改导致虚拟DOM重新渲染和打补丁之后调用，组件DOM已经更新，所以可以执行依赖DOM的工作，避免在此期间更改状态，会导致无限循环|
+| beforeDestory(销毁前) | 组件实例销毁之前，实例仍完全可用，这一步还可以用this来获取实例，一般做一些重置工作，比如清除组件中的定时器和DOM监听事件  |
+| destroyed(销毁后)  | 组件实例销毁之后，所有的事件监听器会被移除，子实例也会被销毁，该钩子在服务端渲染期间不可用  |
 | activated     | keep-alive 缓存的组件激活时      |
 | deactivated   | keep-alive 缓存的组件停用时调用  |
 | errorCaptured | 捕获一个来自孙组件的错误时被调用 |
 
 ### 具体分析
 
-| 生命周期                | 分析                                                                                                                                                                                      |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| beforeCreate -> created | 初始化Vue实例，进行数据观测                                                                                                                                                               |
+| 生命周期 | 分析 |
+| ----------- | ------------ |
+| beforeCreate -> created | 初始化Vue实例，进行数据观测 |
 | created                 | 1. 完成数据观测，属性与方法的运算，watch、event事件回调的配置 2. 可调用methods中的方法，访问和修改data数据触发响应式渲染dom，可通过computed和watch完成数据计算 3. 此时vm.$el 并没有被创建 |
-| beforeMount -> mounted  | 此阶段vm.el完成挂载，vm.$el生成的DOM替换了el选项所对应的DOM                                                                                                                               |
-| mounted                 | vm.el已完成DOM的挂载与渲染，此刻打印vm.$el，发现之前的挂载点及内容已被替换成新的DOM                                                                                                       |
-| beforeUpdate            | 1. 更新的数据必须是被渲染在模板上的（el、template、render之一） 2. 此时view层还未更新 3. 若在beforeUpdate中再次修改数据，不会再次触发更新方法                                             |
-| updated                 | 1. 完成view层的更新 2. 若在updated中再次修改数据，会再次触发更新方法（beforeUpdate、updated）                                                                                             |
-| beforeDestroy           | 实例被销毁前调用，此时实例属性与方法仍可访问                                                                                                                                              |
-| destroyed               | 1. 完全销毁一个实例。可清理它与其它实例的连接，解绑它的全部指令及事件监听器 2. 并不能清除DOM，仅仅销毁实例                                                                                |
+| beforeMount -> mounted  | 此阶段vm.el完成挂载，vm.$el生成的DOM替换了el选项所对应的DOM |
+| mounted                 | vm.el已完成DOM的挂载与渲染，此刻打印vm.$el，发现之前的挂载点及内容已被替换成新的DOM|
+| beforeUpdate            | 1. 更新的数据必须是被渲染在模板上的（el、template、render之一） 2. 此时view层还未更新 3. 若在beforeUpdate中再次修改数据，不会再次触发更新方法|
+| updated                 | 1. 完成view层的更新 2. 若在updated中再次修改数据，会再次触发更新方法（beforeUpdate、updated）|
+| beforeDestroy           | 实例被销毁前调用，此时实例属性与方法仍可访问  |
+| destroyed               | 1. 完全销毁一个实例。可清理它与其它实例的连接，解绑它的全部指令及事件监听器 2. 并不能清除DOM，仅仅销毁实例  |
 
 ### 使用场景分析
 
@@ -140,9 +140,191 @@
 | beforeDestroy | 销毁前，可用于一些定时器或订阅的取消                         |
 | destroyed     | 组件已销毁，作用同上                                         |
 
+### Vue 2 生命周期图解
+
+<div align=center><img src="./img/Vue-life-circle.jpg" width="60%"/></div>
+
 ### 数据请求在created和mouted的区别
 
 - created是在组件实例一旦创建完成的时候立刻调用，这时候页面dom节点并未生成mounted是在页面dom节点渲染完毕之后就立刻执行的触发时机上created是比mounted要更早的两者相同点：都能拿到实例对象的属性和方法讨论这个问题本质就是触发的时机，放在mounted请求有可能导致页面闪动（页面dom结构已经生成），但如果在页面加载前完成则不会出现此情况建议：放在create生命周期当中
+
+### Vue 3 生命周期图解
+
+<div align=center><img src="./img/Vue3-lifeCircle.webp" width="70%"/></div>
+
+### Vue 3 生命周期钩子
+
+- beforeCreate 和 created 被 setup 方法本身所代替，我们在setup中将会访问到9个生命周期
+  - onBeforeMount：在挂载之前被调用，渲染函数render首次被调用
+  - onMounted：组件挂载完成时调用
+  - onBeforeUpdate：数据更新时调用
+  - onUpdated：因数据更新导致的虚拟DOM重新渲染和打补丁时调用
+  - onBeforeUnmount：在卸载组件实例之前调用
+  - onUnmounted：组件卸载后调用
+  - onActivated：keep-alive 缓存激活时调用
+  - onDeactivated：被keep-alive 缓存的组件停用时调用
+  - onErrorCaptured：当捕获一个来自子孙组件的错误时被调用
+
+### Vue 3 生命周期钩子详解
+
+<table>
+<tr>
+<th>生命周期钩子</th>
+<th>类型</th>
+<th>详细信息</th>
+</tr>
+<tr>
+<td>onBeforeMount()</td>
+<td>
+
+```TS
+function onBeforeMount(callback: () => void): void
+```
+
+</td>
+<td>在组件被挂载之前被调用，当这个钩子被调用时，组件已经完成了其响应式状态的设置，但还没有创建 DOM 节点。它即将首次执行 DOM 渲染过程。</td>
+</tr>
+
+<tr>
+<td>onMounted()</td>
+<td>
+
+```TS
+function onMounted(callback: () => void): void
+```
+
+</td>
+<td>
+在组件挂载完成后执行，组件在以下情况下被视为已挂载
+
+- 其所有的同步子组件都已经被挂载（不包括异步组件或 `<Suspend>` 树内的组件）
+- 其自身的DOM树已经创建完成并插入了父容器中。
+
+这个钩子通常用于执行需要访问组件所渲染的 DOM 树相关的副作用
+</td>
+</tr>
+
+<tr>
+<td>onBeforeUpdate()</td>
+<td>
+
+```TS
+function onBeforeUpdate(callback: () => void): void
+```
+
+</td>
+<td>
+在组件即将因为响应式状态变更而更新其 DOM 树之前调用，这个钩子可以用来在 Vue 更新 DOM 之前访问 DOM 状态。在这个钩子中更改状态也是安全的。
+</td>
+</tr>
+
+<tr>
+<td>onUpdated()</td>
+<td>
+
+```TS
+function onUpdated(callback: () => void): void
+```
+
+</td>
+<td>
+在组件因为响应式状态变更而更新其 DOM 树之后调用。父组件的更新钩子将在其子组件的更新钩子之后调用。
+
+这个钩子会在组件的任意 DOM 更新后被调用，这些更新可能是由不同的状态变更导致的。如果你需要在某个特定的状态更改后访问更新后的 DOM，请使用 nextTick() 作为替代。
+</td>
+</tr>
+
+<tr>
+<td>onBeforeUnmount()</td>
+<td>
+
+```TS
+function onBeforeUnmount(callback: () => void): void
+```
+
+</td>
+<td>
+在组件实例被卸载之前调用，这个钩子被调用时，组件实例依然还保有全部功能
+</td>
+</tr>
+
+<tr>
+<td>onUnmounted()</td>
+<td>
+
+```TS
+function onUnmounted(callback: () => void): void
+```
+
+</td>
+<td>
+在组件实例被卸载之后调用，一个组件在以下情况下被视为已卸载
+
+- 其所有子组件都已经被卸载
+- 所有相关的响应式作用（渲染作用以及 `setup()` 时创建的计算属性和侦听器）都已经停止
+ 
+可以在这个钩子手动清理一些副作用，如计时器、DOM事件监听器或与服务器的连接
+</td>
+</tr>
+
+<tr>
+<td>onActivated()</td>
+<td>
+
+```TS
+function onActivated(callback: () => void): void
+```
+
+</td>
+<td>
+
+若组件实例是`<keepAlive>`缓存树的一部分，当组件被插入到DOM中时调用。
+</td>
+</tr>
+
+<tr>
+<td>onDeactivated()</td>
+<td>
+
+```TS
+function onDeactivated(callback: () => void): void
+```
+
+</td>
+<td>
+
+若组件实例是`<keepAlive>`缓存树的一部分，当组件被被从DOM中移除时调用。
+</td>
+</tr>
+
+<tr>
+<td>onErrorCaptured()</td>
+<td>
+
+```TS
+function onErrorCaptured(callback: ErrorCapturedHook): void
+
+type ErrorCapturedHook = (
+  err: unknown,
+  instance: ComponentPublicInstance | null,
+  info: string
+) => boolean | void
+```
+
+</td>
+<td>
+错误可以从以下几个来源中捕获：
+
+- 组件渲染
+- 事件处理器
+- 生命周期钩子
+- `setup()` 函数
+- 侦听器
+- 自定义指令钩子
+- 过度钩子
+</td>
+</tr>
+</table>
 
 ## 6. v-if 与 v-for
 
@@ -330,7 +512,7 @@
 
 ### 虚拟DOM为什么能提升性能
 
-- 如果没有虚拟DOM，要直接比较两个页面的差异，需要对真实DOM进行对比。真实DOM节点是非常复杂的，会有绑定事件，会有各种属性，频繁会触发重拍与重绘，非常消耗性能
+- 如果没有虚拟DOM，要直接比较两个页面的差异，需要对真实DOM进行对比。真实DOM节点是非常复杂的，会有绑定事件，会有各种属性，频繁会触发重排与重绘，非常消耗性能
 - 虚拟DOM相当于在js和真实DOM 中间添加了一层缓存，利用DOM diff 算法，避免了没有必要的DOM操作，从而提升性能
 
 ### 小结
