@@ -38,10 +38,31 @@
   <div id="left" class="col"></div>
   <div id="right" class="col"></div>
   <script>
-    const a = {}
-    // a.name = 'wang'
-    a = []
-    console.log(a)
+    function getDate(str) {
+      let temp = str.split('-')
+      let date = new Date(temp[0], temp[1], temp[2])
+      return date
+    }
+
+    function solution(str) {
+      let arr = str.split('~')
+      let start = arr[0], end = arr[1]
+      let startTime = getDate(start)
+      let endTime = getDate(end)
+      let list = []
+      while ((endTime.getTime() - startTime.getTime()) >= 0) {
+        let year = startTime.getFullYear()
+        let month = startTime.getMonth() + 1 < 10 ? '0' + (startTime.getMonth()) : (startTime.getMonth())
+        let day = startTime.getDate() < 10 ? '0' + startTime.getDate() : startTime.getDate()
+
+        list.push(year + '-' + month + '-' + day)
+        startTime.setDate(startTime.getDate() + 1)
+      }
+      return list
+
+    }
+
+    console.log(solution ('2020-9-29~2020-10-3'));
   </script>
 </body>
 </html>

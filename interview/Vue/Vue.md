@@ -616,7 +616,7 @@ type ErrorCapturedHook = (
 ### 移除 API
 
 - keyCode 支持作为 v-on 的修饰符
-- $on，$off 和 $once 实例方法
+- $on $off 和 $once 实例方法
 - 过滤filter
 - 内联模板 attribute
 - $destroy 实例方法。用户不应再手动管理单个 Vue 组件的生命周期。
@@ -675,7 +675,7 @@ type ErrorCapturedHook = (
 
 - Vue2 项目的问题
   - 代码的可读性随着组件的变大而变差
-  - 每一种代码服用的方式，都存在缺点
+  - 每一种代码复用的方式，都存在缺点
   - TypeScript支持有限
 
 ### Options API
@@ -822,14 +822,37 @@ type ErrorCapturedHook = (
 
 ### 区别
 
-- react 的思路是 HTML in JS，可以说是 all in JS，通过JS 来生成HTML，所以设计了JSX 语法
-
-- Vue 是把HTML， CSS， JS 组合到一起，用各自的处理方式
-
-- react 整体式函数式的思想，在react 中是单向数据流，推崇结合 immutable 来实现数据不可变
-- Vue 的思想是响应式，也就是基于数据可变，通过对每一个属性建立 Watcher 来监听，当属性变化时，响应式对应更新虚拟DOM
-
-- 所以，React 的性能优化需要手动去做
+- 框架本质不同
+  - Vue 本质是 MVVM框架，由 MVC 发展而来
+  - React 是前端组件化框架，由后端组件化发展而来
+- 数据流不同
+  - Vue 中实现双向绑定
+  - React 是单向数据流，称之为onChange/setState 模式
+- 监听数据变化的实现原理不同
+  - Vue 通过 getter/setter 以及一些函数的劫持，能够精确知道数据变化
+  - React 默认是通过比较引用的方式（diff）进行的，如果不优化可能导致大量不必要的VDOM的重新渲染。
+  - Vue 使用的是可变数据，而 React 强调数据的不可变
+- hooks 和 mixin
+  - Vue 也转向了 hooks
+- 组件通信的区别
+  - Vue 中有三种实现组件通信的方式
+    - 父组件通过 props 向子组件传递数据或者回调函数
+    - 子组件通过事件向父组件发送消息
+    - provide/inject 跨层级
+  - React 也有三种
+    - 父组件通过props
+    - context进行跨级通信
+    - 回调函数
+- 模板渲染方式的不同
+  - 表层上，React 通过JSX渲染模板，而Vue 通过一种拓展的HTML语法进行渲染
+  - 深层上，模板原理不同
+    - React 是在组件js代码中，通过原生js实现模板中的常见语法，比如插值，条件，循环等
+    - 而 Vue实在和组件js代码分离的单独模板中，通过指令来实现的
+- 渲染过程不同
+  - Vue 可以更快的计算出 VDOM 的差异，这是因为在渲染过程中，会跟踪每一个组件的依赖关系，不需要重新渲染整个组件树
+  - React 在应用的状态被改变时，全部子组件都会重新渲染。通过shouldComponentUpdate这个生命周期方法可以进行控制，但Vue将此视为默认的优化。
+- Vuex 和 Redux 区别
+  - 从实现原理上来说，最大的区别是两点：Redux使用的是不可变数据，而Vuex的数据是可变的，因此，Redux每次都是用新state替换旧state，而Vuex是直接修改。Redux在检测数据变化的时候，是通过diff的方式比较差异的，而Vuex其实和Vue的原理一样，是通过getter/setter来比较的，这两点的区别，也是因为React和Vue的设计理念不同。React更偏向于构建稳定大型的应用，非常的科班化。相比之下，Vue更偏向于简单迅速的解决问题，更灵活，不那么严格遵循条条框框。因此也会给人一种大型项目用React，小型项目用Vue的感觉。
 
 ### 优势
 
