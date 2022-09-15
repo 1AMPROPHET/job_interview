@@ -2107,6 +2107,26 @@ function quickSort(arr, low, high) {
 - Object.getOwnPropertyDescriptors()
   - `Object.getOwnPropertyDescriptors()`函数用来获取一个对象的所有自身属性的描述符,如果没有任何自身属性，则返回空对象。
 
+### canvas 和 SVG
+
+- 基本介绍
+  - Canvas
+    - 通过js来绘制2D图形
+    - canvas图像单位是像素
+    - canvas图像绘制完毕后，浏览器将不再关注它，如果位置发生变化，就需要重新绘制
+  - SVG
+    - svg 使用XML描述的2D图像
+    - svg是基于xml的，所以 svg 中绘制图形还是使用的元素，js 给元素添加任意事件
+    - svg 绘制的图像是一个对象，如果对象的属性发生改变，浏览器将重新绘制图形
+- SVG 与 Canvas 比较
+  - svg 是一种矢量图，而canvas 依赖于分辨率。所以 svg 放大不会失真，但是 canvas 绘制的图形会失真
+  - svg 支持事件处理器，而 canvas 不支持事件处理器
+  - svg 中的文字独立于图像，文字可保留，可编辑，可搜索，canvas 的文本渲染能力弱
+  - canvas 适合图像密集型的游戏，频繁的绘制图像，svg绘制的复杂度高时减慢渲染的速度
+  - canvas 绘制的图形可以多种格式保存图片，但是svg绘制的图像只能保存为svg格式，使用时可以引入html文件
+  - canvas 适合做游戏开发，svg不适合
+  - canvas 绘制的图形，只能给canvas 整个画布添加事件，而不能给某个文件或图形添加事件处理器，但是svg支持事件绑定，如果需要需要添加带有事件的动画效果时，就需要选择svg。
+
 ## 14. 跨域
 
 ### 14.1 什么是跨域

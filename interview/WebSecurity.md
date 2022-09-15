@@ -127,7 +127,7 @@
 - 跨域的方案
 
   - CORS
-    - CORS 通信过程都是浏览器自动完成，需要浏览器(都支持)和服务器都支持，所以关键在只要服务器支持，就可以跨域通信，CORS请求分两类，简单请求和非简单请求
+    - CORS 通信过程都是浏览器自动完成，需要浏览器(都支持)和服务器都支持，所以关键在只要服务器支持，就可以跨域通信，CORS请求分两类，`简单请求`和`非简单请求`
     - 另外CORS请求默认不包含Cookie以及HTTP认证信息，如果需要包含Cookie，需要满足几个条件：
       - 服务器指定了 Access-Control-Allow-Credentials: true
       - 开发者须在请求中打开withCredentials属性: xhr.withCredentials = true
