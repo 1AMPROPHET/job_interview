@@ -60,6 +60,90 @@
     // })();
     Promise.resolve(1).then(console.log).catch(console.log).then(console.log)
     Promise.resolve(1).then(2).then(Promise.resolve(3)).then(console.log)
+
+    class QueryString {
+
+      static parse = (query) => {
+        let list = query.split('&')
+        let obj = {}
+        list.forEach((item, index) => {
+          let [key, value] = item.split('=')
+          if (!obj[key]) {
+            obj[key] = value
+          } else {
+            obj[key] = [...obj[key], value]
+          }
+        })
+        return obj
+      }
+
+      static stringify = (obj) => {
+        let query = []
+        for (let key in obj) {
+          let str = key
+          for (let item of obj[key]) {
+            query.push(`${key}=${item}`) 
+          }
+        }
+        return query.join('&')
+      }
+    }
+
+    function queryString() {}
+
+    queryString.parse = (query) => {
+      let list = query.split('&')
+      let obj = {}
+      list.forEach((item, index) => {
+        let [key, value] = item.split('=')
+        if (!obj[key]) {
+          obj[key] = value
+        } else {
+          obj[key] = [...obj[key], value]
+        }
+      })
+      return obj
+    }
+    queryString.stringify = (obj) => {
+      let query = []
+      for (let key in obj) {
+        let str = key
+        for (let item of obj[key]) {
+          query.push(`${key}=${item}`)
+        }
+      }
+      return query.join('&')
+    }
+
+    function solution (func, delay=100) {
+      this.list = []
+      this.timer = null
+      setInterval(() => {
+        this.list.push('a ')
+      }, 10);
+      return function () {
+        if (!this.timer) {
+          this.timer = setTimeout(() => {
+            let str = this.list.join('')
+            func(str)
+            this.list = []
+            this.timer = null
+          }, delay);
+        }
+      }
+    }
+
+    const str = 'a=1&b=2&c=3&c=4&c=5'
+    let obj = QueryString.parse(str)
+    let string = QueryString.stringify(obj)
+    console.log(obj, string)
+    const str1 = 'a=1&b=2&c=3&c=4&c=5'
+    let obj1 = queryString.parse(str)
+    let string1 = queryString.stringify(obj)
+    console.log(obj1, string1)
+
+    solution(console.log)()
+
   </script>
 </body>
 </html>

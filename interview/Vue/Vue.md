@@ -859,8 +859,6 @@ type ErrorCapturedHook = (
 - Vuex 和 Redux 区别
   - 从实现原理上来说，最大的区别是两点：Redux使用的是不可变数据，而Vuex的数据是可变的，因此，Redux每次都是用新state替换旧state，而Vuex是直接修改。Redux在检测数据变化的时候，是通过diff的方式比较差异的，而Vuex其实和Vue的原理一样，是通过getter/setter来比较的，这两点的区别，也是因为React和Vue的设计理念不同。React更偏向于构建稳定大型的应用，非常的科班化。相比之下，Vue更偏向于简单迅速的解决问题，更灵活，不那么严格遵循条条框框。因此也会给人一种大型项目用React，小型项目用Vue的感觉。
 
-
-
 - 响应式原理不同
   - Vue
     - Vue 依赖收集，自动优化，数据可变
@@ -1025,7 +1023,7 @@ query: {} // 一个key/value对象，表示 URL 查询参数。跟随在路径�
   - 使用`esbuild`处理项目依赖，`esbuild`使用`go`编写，比一般`node.js`编写的编译器快几个数量级。
 
 -  生产环境
-   -  集成 `Rollup` 打包生产环境代码，依赖其成熟稳定的生态与更简洁的插件机制
+  - 集成 `Rollup` 打包生产环境代码，依赖其成熟稳定的生态与更简洁的插件机制
 
 - 处理流程对比
   - Webpack 通过先将整个应用打包，再将打包后的代码提供给 devServer ，开发者才能开始开发
@@ -1081,6 +1079,7 @@ Vue.prototype.$http = () => {}
 const app = createApp({})
 app.config.globalProperties.$http = () => {}
 ```
+
 ### Provide / Inject
 
 - vue3新的 provide/inject 功能可以穿透多层组件，实现数据从父组件传递到子组件。可以将全局变量放在根组件的 provide 中，这样所有的组件都能使用到这个变量。如果需要变量是响应式的，就需要在 provide 的时候使用 ref 或者 reactive 包装变量。
@@ -1123,3 +1122,16 @@ app.config.globalProperties.$http = () => {}
 - updateChildren主要做了以下操作
   - 设置新旧VNode的头尾指针
   - 新旧头尾指针进行比较，循环向中间靠拢，根据情况调用patchVnode进行patch重复流程、调用createElem创建一个新节点，从哈希表寻找 key一致的VNode 节点再分情况操作
+
+## 35. Vue 性能优化
+
+- 合理使用v-show和 v-if
+- 合理使用computed(缓存)
+- v-for中加key,避免和v-if同时使用
+- 自定义事件和DOM事件及时销毁（否则会导致内存泄露）
+- 合理使用异步组件（import）
+- 合理使用缓存组件（keep-alive）
+- 合理使用异步渲染（$nextTick）
+- data层级不要太深（导致深度监听时递归的次数比较多）
+- 使用vue-loader在开发环境做模板编译（预编译）
+- 使用SSR(服务端渲染)
